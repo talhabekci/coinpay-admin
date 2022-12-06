@@ -119,7 +119,7 @@ $(document).ready(function() {
 
         $("input[name='withdraw-address']").keyup(function() {
 
-            var valid = WAValidator.validate($("input[name='withdraw-address']").val(), 'bitcoin');
+            var valid = WAValidator.validate($("input[name='withdraw-address']").val(), 'bitcoin', 'testnet');
 
             if (valid) {
                 $("button.button-next").css("opacity", "1");

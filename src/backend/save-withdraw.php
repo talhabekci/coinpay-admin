@@ -24,9 +24,9 @@ if ($currency == "btc") {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
     }
 
-    $net_amount = $amount - $fee;
+    $net_amount = $amount + $fee;
 
-    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', NULL, '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
+    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
@@ -56,9 +56,9 @@ if ($currency == "btc") {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
     }
 
-    $net_amount = $amount - $fee;
+    $net_amount = $amount + $fee;
 
-    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', NULL, '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
+    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
@@ -89,9 +89,9 @@ if ($currency == "btc") {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
     }
 
-    $net_amount = $amount - $coinpay_fee;
+    $net_amount = $amount + $coinpay_fee;
 
-    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', NULL, '".$address."', '".$amount."', '".$coinpay_fee."', '".$net_amount."', '".$currency."', 0) ");
+    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$coinpay_fee."', '".$net_amount."', '".$currency."', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }

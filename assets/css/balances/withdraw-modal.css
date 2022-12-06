@@ -1,0 +1,203 @@
+div.container {
+    position: absolute;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    transition: all 1s ease;
+}
+
+div.container>div.modal {
+    border-radius: 15px;
+    position: relative;
+    display: block;
+    margin: 150px auto 0px auto;
+    width: 500px;
+    background-color: #fff;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+div.container>div.modal>div.header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #F99A23;
+    padding: 15px;
+}
+
+div.container>div.modal>div.header>h1 {
+    float: left;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    font-weight: 500;
+    font-size: 18px;
+    color: #FFF;
+}
+
+div.container>div.modal>div.header>button {
+    float: right;
+    margin-top: 4.5px;
+    border: none;
+    background-color: transparent;
+    padding: 0px;
+    line-height: normal;
+    font-size: 14px;
+    color: #FFF;
+}
+
+div.container>div.modal>div.header>button:hover {
+    cursor: pointer;
+}
+
+div.container>div.modal>div.header>div.clear {
+    clear: both;
+}
+
+div.container>div.modal>div.total-balance {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #0006;
+}
+
+div.container>div.modal>div.total-balance>p.balance-text {
+    font-size: 18px;
+}
+
+div.container>div.modal>div.total-balance>p.balance-amount {
+    color: #F99A23;
+    font-size: 18px;
+}
+
+div.container>div.modal>div.withdraw-form {
+    padding: 15px;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount {
+    margin-bottom: 15px;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-label {
+    color: #0009;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-inputs>input {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 201px;
+    background-color: #0001;
+    height: 40px;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-inputs>input:focus {
+    border: none;
+    outline: 1px #F99A23;
+    outline-style: solid;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-notices, div.insufficent-eth {
+    display: none;
+    font-size: 14px;
+    padding: 5px 0px;
+    color: #CF304A;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.address {
+    margin-bottom: 15px;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.address>div.address-label {
+    color: #0009;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.address>div.address-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.address>div.address-inputs>input {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    background-color: #0001;
+    height: 40px;
+}
+
+input[name="withdraw-price"] {
+    pointer-events: none !important;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.address>div.address-inputs>input:focus {
+    border: none;
+    outline: 1px #F99A23;
+    outline-style: solid;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.address>div.address-notices {
+    font-size: 14px;
+    padding: 5px 0px;
+    color: #0009;
+}
+
+div.container>div.modal>div.fees {
+    border-top: 1px solid #0006;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 15px 15px;
+    color: #0009;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+div.container>div.modal>div.fees>div.coinpay-fee {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.container>div.modal>div.fees>div.network-fee {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.container>div.modal>div.fees>div.total {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.container>div.modal>div.next-button {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #0006;
+    padding: 15px;
+}
+
+div.container>div.modal>div.next-button>button.button-next {
+    border: none;
+    border-radius: 2.5px;
+    padding: 10px 20px;
+    background-color: #F99A23;
+    color: #FFF;
+}
+
+div.container>div.modal>div.next-button>button.button-next:hover {
+    cursor: pointer;
+    background-color: #FAA43A;
+}

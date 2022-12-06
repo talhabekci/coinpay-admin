@@ -1,0 +1,143 @@
+.page .page_title {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, .4);
+    min-height: 87px;
+    max-height: 87px;
+    background-color: #FFF;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #616471;
+}
+
+.page .payments {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.page .payments .payment_header {
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+}
+
+.page .payments .payment_header .header_links {
+    position: relative;
+    display: flex;
+}
+
+.page .payments .payment_header .header_links .header_link {
+    height: 48px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    min-width: 160px;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    vertical-align: top;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    color: #616471;
+    margin-left: 3rem;
+}
+
+.page .payments .payment_header .header_links .header_link:hover {
+    color: #FBB866;
+    /*Ana rengin %30 açığı*/
+}
+
+.page .payments .payment_header .header_links .active {
+    border-bottom: 2px solid #F99A23;
+}
+
+.page .payments .payment_body {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.page .payments .payment_body .payment_filter {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    margin: 1.5rem 3rem;
+}
+
+.page .payments .payment_body .payment_filter select {
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, .07);
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 0 auto;
+    font-size: 14px;
+    height: 34px;
+    padding: 0 10px;
+    width: 168px;
+}
+
+.page .payments .payment_body .payment_list {
+    margin: 0px 3rem;
+    overflow: scroll;
+    position: relative;
+}
+
+.page .payments .payment_body .payment_list .no_payments {
+    margin: 40px auto;
+    max-width: 650px;
+    text-align: center;
+}
+
+.page .payments .payment_body .payment_list .no_payment_title {
+    color: #F99A23;
+    font-size: 28px;
+    line-height: 33px;
+}
+
+.page .payments .payment_body .payment_list .no_payment_img {
+    margin: 32px 0;
+}
+
+.page .payments .payment_body .payment_list .no_payment_text {
+    font-size: 16px;
+    line-height: 25px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.page .payments .payment_body .payment_list .payment_row {
+    border-bottom: 1px solid rgba(0, 0, 0, .07);
+}
+
+.page .payments .payment_body .payment_list .payment_row .payment_row_link {
+    display: flex;
+    flex-wrap: wrap;
+    text-decoration: none;
+    color: #616471;
+    font-size: 14px;
+    padding: 1rem;
+}
+
+.page .payments .payment_body .payment_list .payment_row .payment_row_link:hover {
+    background-color: #F7F8F9;
+}
+
+.payment_status li::before {
+    font-size: 75px;
+}
+
+@media (max-width: 599px) {
+    .header_link {
+        min-width: 72px !important;
+    }
+
+    .payment_list {
+        margin: 0 !important;
+    }
+}

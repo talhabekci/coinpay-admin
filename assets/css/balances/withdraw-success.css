@@ -1,0 +1,55 @@
+div.container>div.modal>div.withdraw-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.container>div.modal>div.withdraw-success>div.success-img {
+    margin-top: 30px;
+}
+
+div.container>div.modal>div.withdraw-success>div.succes-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+div.container>div.modal>div.withdraw-success>div.succes-text>div.text-title {
+    font-size: 22px;
+    padding: 15px;
+}
+
+div.container>div.modal>div.withdraw-success>div.succes-text>div.text-content {
+    color: #4D4D4D;
+    padding: 15px;
+    text-align: center;
+}
+
+div.container>div.modal>div.withdraw-success>div.succes-text>div.text-content>p {
+    font-size: 14px;
+}
+
+div.container>div.modal>div.withdraw-success>div.succes-text>div.text-content>p>span {
+    font-weight: 500;
+    color: #1A1A1A;
+}
+
+div.container>div.modal>div.button-back-to-balances {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+div.container>div.modal>div.button-back-to-balances>button.back-to-balances {
+    border: none;
+    border-radius: 2.5px;
+    padding: 10px 20px;
+    background-color: #F99A23;
+    color: #FFF;
+}
+
+div.container>div.modal>div.button-back-to-balances>button.back-to-balances:hover {
+    cursor: pointer;
+    background-color: #FAA43A;
+}

@@ -26,10 +26,10 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="http://localhost/coinpay-admin/assets/img/cp-favicon.png">
     <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/sidebar/style.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/balances/balances.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/balances/withdraw-modal.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/balances/withdraw-summary.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/balances/withdraw-success.css">
+    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/wallet.css">
+    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-modal.css">
+    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-summary.css">
+    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-success.css">
     <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/fontawesome.com/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,16 +38,16 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="http://localhost/coinpay-admin/assets/js/sidebar/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/balances/balances.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/balances/number-format.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/balances/wallet-address-validator.min.js"></script>
-    <title>CoinPay Balances</title>
+    <script src="http://localhost/coinpay-admin/assets/js/wallet/wallet.js"></script>
+    <script src="http://localhost/coinpay-admin/assets/js/wallet/number-format.js"></script>
+    <script src="http://localhost/coinpay-admin/assets/js/wallet/wallet-address-validator.min.js"></script>
+    <title>CoinPay Wallet</title>
 </head>
 
 <body>
     <?php include("src/page/sidebar/sidebar.php"); ?>
     <div class="page">
-        <div class="page_title">Balances</div>
+        <div class="page_title">Wallet</div>
         <div class="balances">
             <table class="balances-table">
                 <thead class="balances-table-head">

@@ -90,6 +90,10 @@
     list-style: none;
 }
 
+.sidebar li.submenu ul li a {
+    padding-left: 20px;
+}
+
 .sidebar li .tooltip {
     position: absolute;
     top: -20px;
@@ -163,6 +167,23 @@
     height: 50px;
     line-height: 50px;
     font-size: 20px;
+}
+
+.sidebar li i.fa-chevron-down {
+    color: #FCFCFC;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.sidebar.open li i.fa-chevron-down {
+    pointer-events: auto;
+    opacity: 1;
 }
 
 .sidebar li.profile {

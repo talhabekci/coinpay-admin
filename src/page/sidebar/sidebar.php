@@ -24,12 +24,33 @@ if ($result == false) {
             </a>
             <span class="tooltip">Overwiev</span>
         </li>
-        <li>
-            <a href="http://localhost/coinpay-admin/balances">
+        <li class="submenu">
+            <a href="http://localhost/coinpay-admin/wallet">
                 <i class="fa-regular fa-money-bills-simple"></i>
-                <span class="links_name">Balances</span>
+                <span class="links_name">Wallet</span>
             </a>
-            <span class="tooltip">Balances</span>
+            <i class="fa-regular fa-chevron-down"></i>
+            <span class="tooltip">Wallet</span>
+            <ul style="display: none;">
+                <li>
+                    <a href="http://localhost/coinpay-admin/wallet/bitcoin-wallet">
+                        <i class="fa-regular fa-money-bills-simple"></i>
+                        <span class="links_name">Bitcoin Wallet</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost/coinpay-admin/wallet/ethereum-wallet">
+                        <i class="fa-regular fa-money-bills-simple"></i>
+                        <span class="links_name">Ethereum Wallet</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost/coinpay-admin/wallet/tether-wallet">
+                        <i class="fa-regular fa-money-bills-simple"></i>
+                        <span class="links_name">Tether Wallet</span>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="http://localhost/coinpay-admin/payments">

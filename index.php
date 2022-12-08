@@ -27,7 +27,7 @@ if ($route[0] == "") {
     } else {
         header("Location: http://localhost/coinpay-admin/login/");
     }
-} elseif ($route[0] == "balances") {
+} elseif ($route[0] == "wallet") {
     $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '".$_SESSION["email"]."' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while selecting data from database " . mysqli_error($open)]]));
@@ -36,7 +36,7 @@ if ($route[0] == "") {
     $n = mysqli_num_rows($result);
 
     if ($n > 0) {
-        include 'src/page/balances/balances.php';
+        include 'src/page/wallet/wallet.php';
     } else {
         header("Location: http://localhost/coinpay-admin/login/");
     }

@@ -36,6 +36,20 @@ if ($route[0] == "") {
     $n = mysqli_num_rows($result);
 
     if ($n > 0) {
+
+        if (isset($route[1])) {
+            if ($route[1] == "bitcoin-wallet") {
+                include 'src/page/wallet/bitcoin-wallet.php';
+                exit;
+            }elseif ($route[1] == "ethereum-wallet") {
+                include 'src/page/wallet/ethereum-wallet.php';
+                exit;
+            }elseif ($route[1] == "tether-wallet") {
+                include 'src/page/wallet/tether-wallet.php';
+                exit;
+            }
+        }
+
         include 'src/page/wallet/wallet.php';
     } else {
         header("Location: http://localhost/coinpay-admin/login/");

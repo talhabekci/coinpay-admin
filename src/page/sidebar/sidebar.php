@@ -34,19 +34,25 @@ if ($result == false) {
             <ul style="display: none;">
                 <li>
                     <a href="http://localhost/coinpay-admin/wallet/bitcoin-wallet">
-                        <i class="fa-regular fa-money-bills-simple"></i>
+                        <i class="fa-brands fa-bitcoin"></i>
+                        <!-- <div class="bg">
+                            <img style="position:absolute;width:20px;height:20px;top:3px;left:3px;" src="../assets/img/btc.svg" alt="Bitcoin">
+                        </div> -->
                         <span class="links_name">Bitcoin Wallet</span>
                     </a>
                 </li>
                 <li>
                     <a href="http://localhost/coinpay-admin/wallet/ethereum-wallet">
-                        <i class="fa-regular fa-money-bills-simple"></i>
+                        <i class="fa-brands fa-ethereum"></i>
+                        <!-- <div class="bg">
+                            <img style="position:absolute;width:30px;height:30px;top:-2px;left:-2px;" src="../assets/css/eth.svg" alt="Ethereum">
+                        </div> -->
                         <span class="links_name">Ethereum Wallet</span>
                     </a>
                 </li>
                 <li>
                     <a href="http://localhost/coinpay-admin/wallet/tether-wallet">
-                        <i class="fa-regular fa-money-bills-simple"></i>
+                        <i class="fa-brands fa-tether"></i>
                         <span class="links_name">Tether Wallet</span>
                     </a>
                 </li>

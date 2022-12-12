@@ -169,6 +169,13 @@
     font-size: 20px;
 }
 
+.sidebar li i.fa-brands {
+    color: #FCFCFC;
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
+}
+
 .sidebar li i.fa-chevron-down {
     color: #FCFCFC;
     height: 50px;

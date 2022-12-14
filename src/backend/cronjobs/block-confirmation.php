@@ -37,7 +37,7 @@ foreach ($result as $txid) {
 
     $gettransaction = request("gettransaction", [$txid["txid"]]);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$gettransaction["result"]["confirmations"]."' WHERE `txid` = '".$txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$gettransaction["result"]["confirmations"]."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -111,7 +111,7 @@ foreach ($result as $eth_txid) {
 
     $blockConfirmation = bcsub($currentBlockNumber, $blockNumber, 0);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."' WHERE `txid` = '".$eth_txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$eth_txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -211,7 +211,7 @@ foreach ($result as $usdt_txid) {
 
     $blockConfirmation = bcsub($currentBlockNumber, $blockNumber, 0);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."' WHERE `txid` = '".$usdt_txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$usdt_txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }

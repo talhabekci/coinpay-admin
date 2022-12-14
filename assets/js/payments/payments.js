@@ -9,6 +9,11 @@ $(document).ready(function() {
         url: "http://localhost/coinpay-admin/src/backend/payments-query.php",
         async: false,
         success: function(response) {
+            if (response["error"]) {
+                if (response["error"]["message"] == "There is no payment to show") {
+                    $(".no-payment").css("display", "block");
+                }
+            }
             data = response;
         },
         dataType: "json"

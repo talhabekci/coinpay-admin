@@ -82,6 +82,30 @@
     width: 168px;
 }
 
+.page .payments .payment_body .no-payment {
+    position: absolute;
+    display: none;
+}
+
+.page .payments .payment_body .no-payment .no-payment-svg {
+    position: relative;
+    box-sizing: border-box;
+    color: #F99A23;
+    font-size: 64px;
+    fill: #F99A23;
+    width: 70px;
+    height: 70px;
+    left: 707px;
+    top: 200px;
+}
+
+.page .payments .payment_body .no-payment .no-payment-msg {
+    position: relative;
+    left: 707px;
+    top: 220px;
+    color: #707a8a;
+}
+
 .page .payments .payment_body .payment_list {
     margin: 0px 3rem;
     overflow: scroll;

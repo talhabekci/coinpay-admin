@@ -52,7 +52,7 @@ if ($result == false) {
                 </li>
                 <li>
                     <a href="http://localhost/coinpay-admin/wallet/tether-wallet">
-                        <i class="fa-brands fa-tether"></i>
+                        <i class="fa-brands fa-tether">₮</i>
                         <span class="links_name">Tether Wallet</span>
                     </a>
                 </li>

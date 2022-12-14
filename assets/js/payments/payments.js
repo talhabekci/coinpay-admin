@@ -46,7 +46,7 @@ $(document).ready(function() {
 
             if (data[i]["Status"] == "InValid") {
 
-                $(".payment_list").append('<div class="payment_row"><a href="#" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #CF304A; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
+                $(".payment_list").append('<div class="payment_row"><a href="http://localhost/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #CF304A; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
 
             } else {
 
@@ -70,7 +70,7 @@ $(document).ready(function() {
 
             if (data[i]["Status"] == "Valid") {
 
-                $(".payment_list").append('<div class="payment_row"><a href="#" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #03A66D; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
+                $(".payment_list").append('<div class="payment_row"><a href="http://localhost/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #03A66D; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
 
             } else {
 

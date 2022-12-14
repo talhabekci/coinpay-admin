@@ -1,4 +1,6 @@
 <?php
+require 'src/backend/request.php';
+
 $route = explode("/", $_GET['route']);//URL'i array yapıyor.
 
 $payment_id = $route[2];
@@ -16,6 +18,14 @@ if ($result == FALSE) {
 }
 
 $transaction_details = mysqli_fetch_array($result);
+
+$paid = 0;
+$gettransaction = request("gettransaction", [$transaction_details["txid"]]);
+foreach ($gettransaction["result"]["details"] as $details) {
+    if ($details["address"] == $order_details["address"]) {
+        $paid = $details["amount"];
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -60,7 +70,7 @@ $transaction_details = mysqli_fetch_array($result);
                                     <div class="payment-summary-item-label">TOTAL (<?=$order_details["currency"];?>)</div>
                                 </div>
                                 <div class="payment-summary-item">
-                                    <div class="payment-summary-item-value green"><?=number_format($transaction_details["amount"], 8, '.', ',');?></div>
+                                    <div class="payment-summary-item-value green"><?=number_format($paid, 8, '.', ',');?></div>
                                     <div class="payment-summary-item-label">PAID (<?=$order_details["currency"];?>)</div>
                                 </div>
                             </div>
@@ -82,7 +92,7 @@ $transaction_details = mysqli_fetch_array($result);
                                         if ($transaction_details["status"] == 2) {
                                             ?><div class="details-panel-item-field green">Complated</div><?php
                                         }else {
-                                            ?><div class="details-panel-item-field red">Not Complated</div><?php
+                                            ?><div class="details-panel-item-field red">Cancelled</div><?php
                                         }
                                         ?>
                                     </div>

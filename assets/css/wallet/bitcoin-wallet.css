@@ -15,11 +15,42 @@
     margin-right: 10px;
 }
 
+.page .page_title i {
+    position: relative;
+    top: 0px;
+    right: 850px;
+    padding: 10px;
+    cursor: pointer;
+}
+
 .page .bitcoin-wallet {
     margin: 1.5rem 3rem;
     display: flex;
     flex-direction: column;
     height: 100%;
+}
+
+.page .bitcoin-wallet .no-transaction {
+    position: absolute;
+}
+
+.page .bitcoin-wallet .no-transaction .no-tx-svg {
+    position: relative;
+    box-sizing: border-box;
+    color: #F99A23;
+    font-size: 64px;
+    fill: #F99A23;
+    width: 70px;
+    height: 70px;
+    left: 707px;
+    top: 200px;
+}
+
+.page .bitcoin-wallet .no-transaction .no-tx-msg {
+    position: relative;
+    left: 707px;
+    top: 220px;
+    color: #707a8a;
 }
 
 .page .bitcoin-wallet .wallet-table {
@@ -98,4 +129,55 @@
 .page .bitcoin-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body .balance-text {
     font-size: 14px;
     font-weight: 200;
+}
+
+.page .bitcoin-wallet .wallet-table .wallet-table-head .wallet-table-row .table-row-titles {
+    display: table-cell;
+    padding: 16px;
+    font-size: 0.875rem;
+    text-align: left;
+    font-weight: bold;
+    line-height: 1.43;
+    border-bottom: 1px solid #5b616e33;
+    vertical-align: inherit;
+}
+
+.page .bitcoin-wallet .wallet-table .wallet-table-body {
+    display: table-header-group;
+}
+
+.page .bitcoin-wallet .wallet-table .wallet-table-body .wallet-table-row {
+    color: inherit;
+    display: table-row;
+    outline: 0;
+    vertical-align: middle;
+}
+
+.page .bitcoin-wallet .wallet-table .wallet-table-body .wallet-table-row .wallet-table-cell-body {
+    display: table-cell;
+    padding: 16px;
+    font-size: 0.875rem;
+    text-align: left;
+    font-weight: 400;
+    line-height: 1.43;
+    border-bottom: 1px solid #5b616e33;
+    vertical-align: inherit;
+}
+
+/* divs */
+.page .bitcoin-wallet .wallet-table .wallet-table-body .wallet-table-row .wallet-table-cell-body .cell-body-div-txid .cell-body-div-txid-text .txid a {
+    text-decoration: none;
+    color: #0c6cf2;
+}
+
+.page .bitcoin-wallet .wallet-table .wallet-table-body .wallet-table-row .wallet-table-cell-body .cell-body-div-status {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.page .bitcoin-wallet .wallet-table .wallet-table-body .wallet-table-row .wallet-table-cell-body .cell-body-div-status .cell-body-div-status-text .status i {
+    font-size: 16px;
+    margin-left: 15px;
 }

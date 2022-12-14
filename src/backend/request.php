@@ -10,7 +10,7 @@ function request($method, $params) {
         CURLOPT_URL => "localhost",
         CURLOPT_PORT => 18332,
         CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-        CURLOPT_USERPWD => "__cookie__:3e59734d53a3165b6a99e8e686fe02233e987680850394aa5cff3d664c631dd9",
+        CURLOPT_USERPWD => "__cookie__:766e541f8ad511ff46880635f49dabe340ccc2d3f4c983b295741131fb718323",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
         CURLOPT_POST => true,

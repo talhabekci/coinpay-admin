@@ -116,19 +116,23 @@
 
 .page .bitcoin-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+}
+
+.page .bitcoin-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body .total-amount {
+    font-size: 22px;
+    margin-right: 10px;
 }
 
 .page .bitcoin-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body .total-balance {
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 5px;
-    text-align: left;
+    font-size: 22px;
+    opacity: 0.5;
 }
 
 .page .bitcoin-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body .balance-text {
     font-size: 14px;
     font-weight: 200;
+    text-align: left;
 }
 
 .page .bitcoin-wallet .wallet-table .wallet-table-head .wallet-table-row .table-row-titles {
@@ -180,4 +184,38 @@
 .page .bitcoin-wallet .wallet-table .wallet-table-body .wallet-table-row .wallet-table-cell-body .cell-body-div-status .cell-body-div-status-text .status i {
     font-size: 16px;
     margin-left: 15px;
+}
+
+/* modal ek css*/
+div.main {
+    height: 400px;
+    font-size: 18px;
+}
+
+.img-qr {
+    width: 300px;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+div.text {
+    text-align: center;
+}
+
+i.fa-regular.fa-clipboard {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+i.fa-regular.fa-clipboard:hover {
+    cursor: pointer;
+    color: black;
+}
+
+div.aaddress {
+    color: #808080;
+    margin-top: 5px;
+    text-align: center;
 }

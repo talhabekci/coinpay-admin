@@ -1,7 +1,22 @@
 $(document).ready(function() {
 
+    var host_name = "";
+
+    $.ajax({
+        method: "POST",
+        url: "../src/backend/host-name.php",
+        async: false,
+        data: {
+            data: "host_name"
+        },
+        dataType: "json",
+        success: function(response) {
+            host_name = response["ip_address"]
+        }
+    });
+
     $(".page > .page_title > i").click(function() {
-        location.href = "http://localhost/coinpay-admin/wallet";
+        location.href = "http://" + host_name + "/coinpay-admin/wallet";
     });
 
     var btc_network_fee_usd = 0;
@@ -23,7 +38,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost/coinpay/src/btcPrice/usd-to-btc?totalPrice=' + btc_network_fee_usd,
+                url: 'http://' + host_name + '/coinpay/src/btcPrice/usd-to-btc?totalPrice=' + btc_network_fee_usd,
                 dataType: 'json',
                 success: function(response) {
                     btc_network_fee = parseFloat(response["BTC"]);
@@ -36,7 +51,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost/coinpay/src/btcPrice/btc-to-usd?totalPrice=1',
+        url: 'http://' + host_name + '/coinpay/src/btcPrice/btc-to-usd?totalPrice=1',
         dataType: 'json',
         success: function(response) {
             btc_current = response["USD"];
@@ -163,7 +178,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/coinpay-admin/src/backend/save-withdraw.php',
+                    url: 'http://' + host_name + '/coinpay-admin/src/backend/save-withdraw.php',
                     dataType: 'json',
                     data: {
                         withdraw_id: randString,
@@ -175,7 +190,7 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
-                                '<div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://localhost/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(btc_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
+                                '<div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(btc_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
                             );
 
                             $("button.fa-regular.fa-xmark").click(function() {
@@ -206,7 +221,7 @@ $(document).ready(function() {
             data: {
                 currency: "btc"
             },
-            url: "http://localhost/coinpay-admin/src/backend/withdraw-address-create.php",
+            url: "http://" + host_name + "/coinpay-admin/src/backend/withdraw-address-create.php",
             dataType: "json",
             success: function(response) {
                 address = response["result"];

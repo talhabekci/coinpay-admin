@@ -1,5 +1,4 @@
 <?php
-
 require 'src/backend/config.php';
 require 'src/backend/url_request.php';
 
@@ -11,12 +10,12 @@ if ($result == false) {
 $n = mysqli_num_rows($result);
 
 if ($n <= 0) {
-    header("Location: http://localhost/coinpay-admin/login/");
+    header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
 }
 
-$btc_current = request_to_url("http://localhost/coinpay/src/btcPrice/btc-to-usd?totalPrice=1");
-$eth_current = request_to_url("http://localhost/coinpay/src/ethPrice/eth-to-usd?totalPrice=1");
-$usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-usd?totalPrice=1");
+$btc_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/btcPrice/btc-to-usd?totalPrice=1");
+$eth_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/ethPrice/eth-to-usd?totalPrice=1");
+$usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/usdtPrice/usdt-to-usd?totalPrice=1");
 
 ?>
 <!DOCTYPE html>
@@ -24,23 +23,23 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" type="image/x-icon" href="http://localhost/coinpay-admin/assets/img/cp-favicon.png">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/sidebar/style.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/wallet.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-modal.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-summary.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-success.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/fontawesome.com/css/all.css">
+    <link rel="icon" type="image/x-icon" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/cp-favicon.png">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/sidebar/style.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/wallet.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/withdraw-modal.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/withdraw-summary.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/withdraw-success.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/fontawesome.com/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/sidebar/index.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/sidebar/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/wallet/wallet.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/wallet/number-format.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/wallet/wallet-address-validator.min.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/wallet.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/number-format.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/wallet-address-validator.min.js"></script>
     <title>CoinPay Wallet</title>
 </head>
 
@@ -69,11 +68,11 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
                     </tr>
                 </thead>
                 <tbody class="balances-table-body">
-                    <tr class="balances-table-row">
+                    <tr class="balances-table-row btc">
                         <td class="balances-table-cell-body">
                             <div class="cell-body-div-name">
                                 <div class="cell-body-img">
-                                    <img src="http://localhost/coinpay-admin/assets/img/btc.png" width="32" height="32" alt="Bitcoin">
+                                    <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/btc.png" width="32" height="32" alt="Bitcoin">
                                 </div>
                                 <span role="presentation" aria-hidden="true" style="flex-grow: 0; flex-shrink: 0; width: 8px;"></span>
                                 <p class="cell-body-text">Bitcoin</p>
@@ -91,6 +90,7 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
                         <td class="balances-table-cell-body">
                             <div class="cell-body-div-action">
                                 <div class="cell-body-div-action-text">
+                                    <p class="action-name deposit-btc">Deposit</p>
                                     <p class="action-name withdraw-btc">Withdraw</p>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
                         <td class="balances-table-cell-body">
                             <div class="cell-body-div-name">
                                 <div class="cell-body-img">
-                                    <img src="http://localhost/coinpay-admin/assets/img/eth.svg" width="32" height="32" alt="Bitcoin">
+                                    <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/eth.svg" width="32" height="32" alt="Bitcoin">
                                 </div>
                                 <span role="presentation" aria-hidden="true" style="flex-grow: 0; flex-shrink: 0; width: 8px;"></span>
                                 <p class="cell-body-text">Ethereum</p>
@@ -118,6 +118,7 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
                         <td class="balances-table-cell-body">
                             <div class="cell-body-div-action">
                                 <div class="cell-body-div-action-text">
+                                    <p class="action-name deposit-eth">Deposit</p>
                                     <p class="action-name withdraw-eth">Withdraw</p>
                                 </div>
                             </div>
@@ -127,7 +128,7 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
                         <td class="balances-table-cell-body">
                             <div class="cell-body-div-name">
                                 <div class="cell-body-img">
-                                    <img src="http://localhost/coinpay-admin/assets/img/usdt.svg" width="32" height="32" alt="Bitcoin">
+                                    <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/usdt.svg" width="32" height="32" alt="Bitcoin">
                                 </div>
                                 <span role="presentation" aria-hidden="true" style="flex-grow: 0; flex-shrink: 0; width: 8px;"></span>
                                 <p class="cell-body-text">Tether</p>
@@ -145,6 +146,7 @@ $usdt_current = request_to_url("http://localhost/coinpay/src/usdtPrice/usdt-to-u
                         <td class="balances-table-cell-body">
                             <div class="cell-body-div-action">
                                 <div class="cell-body-div-action-text">
+                                    <p class="action-name deposit-usdt">Deposit</p>
                                     <p class="action-name withdraw-usdt">Withdraw</p>
                                 </div>
                             </div>

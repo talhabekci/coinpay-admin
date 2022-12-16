@@ -1,7 +1,22 @@
 $(document).ready(function() {
 
+    var host_name = "";
+
+    $.ajax({
+        method: "POST",
+        url: "../src/backend/host-name.php",
+        async: false,
+        data: {
+            data: "host_name"
+        },
+        dataType: "json",
+        success: function(response) {
+            host_name = response["ip_address"]
+        }
+    });
+
     $(".page > .page_title > i").click(function() {
-        location.href = "http://localhost/coinpay-admin/wallet";
+        location.href = "http://" + host_name + "/coinpay-admin/wallet";
     });
 
     //Ethereum Deposit Modal
@@ -14,7 +29,7 @@ $(document).ready(function() {
             data: {
                 currency: "eth"
             },
-            url: "http://localhost/coinpay-admin/src/backend/withdraw-address-create.php",
+            url: "http://" + host_name + "/coinpay-admin/src/backend/withdraw-address-create.php",
             dataType: "json",
             success: function(response) {
                 address = response["result"];

@@ -5,6 +5,8 @@ session_start();
 header('Access-Control-Allow-Origin: *');
 //header("Content-Type: application/json");
 require 'src/backend/config.php';
+require 'src/backend/host-name.php';
+$host_name = getHost();
 
 $route = explode("/", $_GET['route']);//URL'i array yapıyor.
 
@@ -13,7 +15,7 @@ if (empty($route)) {
 }
 
 if ($route[0] == "") {
-    header("Location: http://localhost/coinpay-admin/login/");
+    header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
 } elseif ($route[0] == "overview") {
     $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '".$_SESSION["email"]."' ");
     if ($result == false) {
@@ -25,7 +27,7 @@ if ($route[0] == "") {
     if ($n > 0) {
         include 'src/page/overview/overview.php';
     } else {
-        header("Location: http://localhost/coinpay-admin/login/");
+        header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
     }
 } elseif ($route[0] == "wallet") {
     $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '".$_SESSION["email"]."' ");
@@ -52,7 +54,7 @@ if ($route[0] == "") {
 
         include 'src/page/wallet/wallet.php';
     } else {
-        header("Location: http://localhost/coinpay-admin/login/");
+        header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
     }
 } elseif ($route[0] == "payments") {
     $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '".$_SESSION["email"]."' ");
@@ -73,7 +75,7 @@ if ($route[0] == "") {
         include 'src/page/payments/payments.php';
 
     } else {
-        header("Location: http://localhost/coinpay-admin/login/");
+        header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
     }
 } elseif ($route[0] == "payment-tools") {
     $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '".$_SESSION["email"]."' ");
@@ -86,7 +88,7 @@ if ($route[0] == "") {
     if ($n > 0) {
         include 'src/page/payment-tools/payment-tools.php';
     } else {
-        header("Location: http://localhost/coinpay-admin/login/");
+        header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
     }
 } elseif ($route[0] == "settings") {
     $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '".$_SESSION["email"]."' ");
@@ -99,7 +101,7 @@ if ($route[0] == "") {
     if ($n > 0) {
         include 'src/page/settings/settings.php';
     } else {
-        header("Location: http://localhost/coinpay-admin/login/");
+        header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
     }
 } elseif ($route[0] == "signup") {
     include 'src/page/signup/signup.php';
@@ -108,5 +110,5 @@ if ($route[0] == "") {
 } elseif ($route[0] == "logout") {
     include 'src/backend/logout.php';
 }else {
-    header("Location: http://localhost/coinpay-admin/overview/");
+    header("Location: http://".$host_name["ip_address"]."/coinpay-admin/overview/");
 }

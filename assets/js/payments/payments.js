@@ -1,12 +1,27 @@
 $(document).ready(function() {
 
+    var host_name = "";
+
+    $.ajax({
+        method: "POST",
+        url: "src/backend/host-name.php",
+        async: false,
+        data: {
+            data: "host_name"
+        },
+        dataType: "json",
+        success: function(response) {
+            host_name = response["ip_address"]
+        }
+    });
+
     $("div.sidebar > ul.nav-list > li > a > i.fa-regular.fa-wave-pulse").addClass("active");
 
     var data;
 
     $.ajax({
         type: "GET",
-        url: "http://localhost/coinpay-admin/src/backend/payments-query.php",
+        url: "http://" + host_name + "/coinpay-admin/src/backend/payments-query.php",
         async: false,
         success: function(response) {
             if (response["error"]) {
@@ -34,7 +49,7 @@ $(document).ready(function() {
             return x[Math.floor(Math.random() * x.length)]
         }).join('');
 
-        $(".payment_list").append('<div class="payment_row"><a href="http://localhost/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: ' + status_color + '; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
+        $(".payment_list").append('<div class="payment_row"><a href="http://' + host_name + '/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: ' + status_color + '; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
 
     }
 
@@ -51,7 +66,7 @@ $(document).ready(function() {
 
             if (data[i]["Status"] == "InValid") {
 
-                $(".payment_list").append('<div class="payment_row"><a href="http://localhost/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #CF304A; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
+                $(".payment_list").append('<div class="payment_row"><a href="http://' + host_name + '/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #CF304A; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
 
             } else {
 
@@ -75,7 +90,7 @@ $(document).ready(function() {
 
             if (data[i]["Status"] == "Valid") {
 
-                $(".payment_list").append('<div class="payment_row"><a href="http://localhost/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #03A66D; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
+                $(".payment_list").append('<div class="payment_row"><a href="http://' + host_name + '/coinpay-admin/payments/payment/' + data[i]["Order-ID"] + '" class="payment_row_link"><div class="payment_id" style="font-weight: bold; flex: 25%; text-align: left;">' + data[i]["Order-ID"] + '</div><div class="payment_date" style="flex: 25%; text-align: left;">' + data[i]["Date"] + '</div><div class="payment_status" style="color: #03A66D; flex: 25%; text-align: left;">' + data[i]["Status"] + '</div><div class="payment_amount" style="flex: 25%; text-align: right;">' + data[i]["Total-Price"] + ' USD</div></a></div>');
 
             } else {
 

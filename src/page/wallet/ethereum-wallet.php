@@ -10,10 +10,10 @@ if ($result == false) {
 $n = mysqli_num_rows($result);
 
 if ($n <= 0) {
-    header("Location: http://localhost/coinpay-admin/login/");
+    header("Location: http://".$host_name["ip_address"]."/coinpay-admin/login/");
 }
 
-$eth_current = request_to_url("http://localhost/coinpay/src/ethPrice/eth-to-usd?totalPrice=1");
+$eth_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/ethPrice/eth-to-usd?totalPrice=1");
 
 $tx_result = mysqli_query($open, "SELECT DAY(`date`) as `day`, MONTHNAME(`date`) as `monthname`, DATE_FORMAT(`date`,'%H:%i') as `date_formated`, `type`, `txid`, `status` FROM `cp_transactions` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' AND `is_wallet` = 'yes'  ORDER BY `date` DESC ");
 if ($tx_result == false) {
@@ -27,23 +27,23 @@ $tx_number = mysqli_num_rows($tx_result);
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" type="image/x-icon" href="http://localhost/coinpay-admin/assets/img/cp-favicon.png">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/sidebar/style.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/ethereum-wallet.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-modal.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-summary.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/css/wallet/withdraw-success.css">
-    <link rel="stylesheet" href="http://localhost/coinpay-admin/assets/fontawesome.com/css/all.css">
+    <link rel="icon" type="image/x-icon" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/cp-favicon.png">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/sidebar/style.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/ethereum-wallet.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/withdraw-modal.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/withdraw-summary.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/wallet/withdraw-success.css">
+    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/fontawesome.com/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/sidebar/index.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/sidebar/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/wallet/ethereum-wallet.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/wallet/number-format.js"></script>
-    <script src="http://localhost/coinpay-admin/assets/js/wallet/wallet-address-validator.min.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/ethereum-wallet.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/number-format.js"></script>
+    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/wallet-address-validator.min.js"></script>
     <title>CoinPay Wallet</title>
 </head>
 
@@ -51,7 +51,7 @@ $tx_number = mysqli_num_rows($tx_result);
     <?php include("src/page/sidebar/sidebar.php"); ?>
     <div class="page">
         <div class="page_title">
-            <img src="http://localhost/coinpay-admin/assets/img/eth.svg" width="32" height="32" alt="Bitcoin">
+            <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/eth.svg" width="32" height="32" alt="Bitcoin">
             <span>Ethereum Wallet</span>
             <i class="fa-regular fa-chevron-left"></i>
         </div>

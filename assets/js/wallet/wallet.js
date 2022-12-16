@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+    var host_name = "";
+
+    $.ajax({
+        method: "POST",
+        url: "src/backend/host-name.php",
+        async: false,
+        data: {
+            data: "host_name"
+        },
+        dataType: "json",
+        success: function(response) {
+            host_name = response["ip_address"]
+        }
+    });
+
     const web3 = new Web3('ws://192.168.1.90:8546');
 
     var btc_network_fee_usd = 0;
@@ -21,7 +36,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost/coinpay/src/btcPrice/usd-to-btc?totalPrice=' + btc_network_fee_usd,
+                url: 'http://' + host_name + '/coinpay/src/btcPrice/usd-to-btc?totalPrice=' + btc_network_fee_usd,
                 dataType: 'json',
                 success: function(response) {
                     btc_network_fee = parseFloat(response["BTC"]);
@@ -42,7 +57,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost/coinpay/src/btcPrice/btc-to-usd?totalPrice=1',
+        url: 'http://' + host_name + '/coinpay/src/btcPrice/btc-to-usd?totalPrice=1',
         dataType: 'json',
         success: function(response) {
             btc_current = response["USD"];
@@ -52,7 +67,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost/coinpay/src/ethPrice/eth-to-usd?totalPrice=1',
+        url: 'http://' + host_name + '/coinpay/src/ethPrice/eth-to-usd?totalPrice=1',
         dataType: 'json',
         success: function(response) {
             eth_current = response["USD"];
@@ -61,7 +76,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost/coinpay/src/usdtPrice/usdt-to-usd?totalPrice=1',
+        url: 'http://' + host_name + '/coinpay/src/usdtPrice/usdt-to-usd?totalPrice=1',
         dataType: 'json',
         success: function(response) {
             usdt_current = response["USD"];
@@ -190,7 +205,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/coinpay-admin/src/backend/save-withdraw.php',
+                    url: 'http://' + host_name + '/coinpay-admin/src/backend/save-withdraw.php',
                     dataType: 'json',
                     data: {
                         withdraw_id: randString,
@@ -202,7 +217,7 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
-                                '<div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://localhost/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(btc_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
+                                '<div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(btc_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
                             );
 
                             $("button.fa-regular.fa-xmark").click(function() {
@@ -217,6 +232,34 @@ $(document).ready(function() {
 
                 });
             });
+
+        });
+
+    });
+
+    //Bitcoin Deposit Modal
+    $("p.action-name.deposit-btc").click(function() {
+
+        var address = "";
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                currency: "btc"
+            },
+            url: "http://" + host_name + "/coinpay-admin/src/backend/withdraw-address-create.php",
+            dataType: "json",
+            success: function(response) {
+                address = response["result"];
+            }
+        });
+
+        $("body").append('<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Deposit Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="main"><div class="img-qr"><img class="qr" width="300" height="300" src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + address + '" alt=""></div><div class="text"><label id="label" for="">Address</label><div class="aaddress">' + address + ' <i class="fa-regular fa-clipboard"></i></div></div></div></div></div>');
+
+        $("button.fa-regular.fa-xmark").click(function() {
+
+            $(".container").remove();
 
         });
 
@@ -376,7 +419,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/coinpay-admin/src/backend/save-withdraw.php',
+                    url: 'http://' + host_name + '/coinpay-admin/src/backend/save-withdraw.php',
                     dataType: 'json',
                     data: {
                         withdraw_id: randString,
@@ -388,7 +431,7 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
-                                '<div class="header"><h1>CoinPAY - Withdraw Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://localhost/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(eth_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
+                                '<div class="header"><h1>CoinPAY - Withdraw Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(eth_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
                             );
 
                             $("button.fa-regular.fa-xmark").click(function() {
@@ -403,6 +446,33 @@ $(document).ready(function() {
 
                 });
             });
+
+        });
+
+    });
+
+    //Deposit Ethereum Modal
+    $("p.action-name.deposit-eth").click(function() {
+        var address = "";
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                currency: "eth"
+            },
+            url: "http://" + host_name + "/coinpay-admin/src/backend/withdraw-address-create.php",
+            dataType: "json",
+            success: function(response) {
+                address = response["result"];
+            }
+        });
+
+        $("body").append('<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Deposit Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="main"><div class="img-qr"><img class="qr" width="300" height="300" src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + address + '" alt=""></div><div class="text"><label id="label" for="">Address</label><div class="aaddress">' + address + ' <i class="fa-regular fa-clipboard"></i></div></div></div></div></div>');
+
+        $("button.fa-regular.fa-xmark").click(function() {
+
+            $(".container").remove();
 
         });
 
@@ -576,7 +646,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/coinpay-admin/src/backend/save-withdraw.php',
+                    url: 'http://' + host_name + '/coinpay-admin/src/backend/save-withdraw.php',
                     dataType: 'json',
                     data: {
                         withdraw_id: randString,
@@ -589,7 +659,7 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
-                                '<div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://localhost/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> USDT <span class="success-price">(' + $.number(usdt_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
+                                '<div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> USDT <span class="success-price">(' + $.number(usdt_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
                             );
 
                             $("button.fa-regular.fa-xmark").click(function() {
@@ -605,6 +675,33 @@ $(document).ready(function() {
 
                 });
             });
+
+        });
+
+    });
+
+    //Tether Deposit Modal
+    $("p.action-name.deposit-usdt").click(function() {
+        var address = "";
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {
+                currency: "usdt"
+            },
+            url: "http://" + host_name + "/coinpay-admin/src/backend/withdraw-address-create.php",
+            dataType: "json",
+            success: function(response) {
+                address = response["result"];
+            }
+        });
+
+        $("body").append('<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Deposit Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="main"><div class="img-qr"><img class="qr" width="300" height="300" src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + address + '" alt=""></div><div class="text"><label id="label" for="">Address</label><div class="aaddress">' + address + ' <i class="fa-regular fa-clipboard"></i></div></div></div></div></div>');
+
+        $("button.fa-regular.fa-xmark").click(function() {
+
+            $(".container").remove();
 
         });
 

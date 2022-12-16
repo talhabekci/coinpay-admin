@@ -1,6 +1,24 @@
+var host_name = "";
+
+$.ajax({
+    method: "POST",
+    url: "src/backend/host-name.php",
+    async: false,
+    data: {
+        data: "host_name"
+    },
+    dataType: "json",
+    success: function(response) {
+        console.log(response)
+        host_name = response["ip_address"]
+    }
+});
+
+//console.log(host_name);
+
 $.ajax({
     type: 'GET',
-    url: 'http://localhost/coinpay-admin/src/backend/chart-query.php',
+    url: 'http://' + host_name + '/coinpay-admin/src/backend/chart-query.php',
     dataType: 'json',
     async: false,
     success: function(response) {

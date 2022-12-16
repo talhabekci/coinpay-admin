@@ -1,5 +1,20 @@
 $("document").ready(function() {
 
+    var host_name = "";
+
+    $.ajax({
+        method: "POST",
+        url: "../src/backend/host-name.php",
+        async: false,
+        data: {
+            data: "host_name"
+        },
+        dataType: "json",
+        success: function(response) {
+            host_name = response["ip_address"]
+        }
+    });
+
     function IsEmailValid(email) {
         var regex =
             /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -89,7 +104,7 @@ $("document").ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost/coinpay-admin/src/backend/login.php',
+            url: 'http://' + host_name + '/coinpay-admin/src/backend/login.php',
             data: {
                 email: $(".input.email").val(),
                 password: $(".input.password").val(),
@@ -102,7 +117,7 @@ $("document").ready(function() {
                     $(".error-message.login").css("display", "flex");
                     $(".error-message.login > .error-message-text").text(response["error"]);
                 } else if (response["result"] == "Login Successfull") {
-                    location.href = "http://localhost/coinpay-admin/overview/"
+                    location.href = "http://" + host_name + "/coinpay-admin/overview/"
                 }
             }
         });

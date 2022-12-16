@@ -1,17 +1,14 @@
 <?php
 
+if (isset($_POST["data"])) {
+    echo json_encode(["ip_address" => "192.168.1.47", "error" => NULL]);
+}
+
 function getHost() {
 
-    $host_name = [];
+    $host_name = json_encode(["ip_address" => "192.168.1.47", "error" => NULL]);
 
-    if ($_SERVER['REMOTE_ADDR'] == "::1") {
-        $host_name = "localhost";
-    }else {
-        $host_name = $_SERVER['REMOTE_ADDR'];
-    }
-
-    echo $host_name;
-
+    return json_decode($host_name, TRUE);
 }
 
 ?>

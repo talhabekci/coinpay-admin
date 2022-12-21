@@ -29,6 +29,7 @@ $(document).ready(function() {
 
     const web3 = new Web3('ws://192.168.1.90:8546');
 
+    var min_withdraw_amount = 50.00;
     var btc_network_fee_usd = 0;
     var btc_network_fee = 0;
     var coinpay_fee_percentage = 3;
@@ -107,7 +108,7 @@ $(document).ready(function() {
         }).join('');
 
         $("body").append(
-            '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance btc"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".balance-amount.btc").attr("data-btc-balance") + ' BTC</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 BTC"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices">Invalid or Insufficent Balance</div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter BTC Address"></div><div class="address-notices">Please ensure this address is a valid Bitcoin (BTC) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 BTC</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="' + btc_network_fee + '">' + btc_network_fee + ' BTC</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" dataa-fee-amount="' + btc_network_fee + '">' + btc_network_fee + ' BTC</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
+            '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance btc"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".balance-amount.btc").attr("data-btc-balance") + ' BTC</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 BTC"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices"><div class="balance-notice">Invalid or Insufficent Balance</div><div class="price-notice">Min withdraw amount is $50</div></div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter BTC Address"></div><div class="address-notices">Please ensure this address is a valid Bitcoin (BTC) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 BTC</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="' + btc_network_fee + '">' + btc_network_fee + ' BTC</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" dataa-fee-amount="' + btc_network_fee + '">' + btc_network_fee + ' BTC</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
         );
 
         $("button.fa-regular.fa-xmark").click(function() {
@@ -131,14 +132,31 @@ $(document).ready(function() {
                 $("button.button-next").css("pointer-events", "none");
                 $("input[name='withdraw-amount']").css("outline-color", "#CF304A");
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
-                $("div.amount-notices").css("display", "block");
+                $("div.balance-notice").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
                 $("input[name='withdraw-amount']").css("outline-color", "#F99A23");
                 $("input[name='withdraw-amount']").css("color", "#000");
-                $("div.amount-notices").css("display", "none");
+                $("div.balance-notice").css("display", "none");
+                $("input[name='withdraw-price']").val($.number(btc_current_parse * input_val_parse, 2) + " USD");
+            }
+
+            if ($.number(btc_current_parse * input_val_parse, 2) < min_withdraw_amount) {
+                $("button.button-next").css("opacity", "0.5");
+                $("button.button-next").css("pointer-events", "none");
+                $("input[name='withdraw-price']").css("outline-color", "#CF304A");
+                $("input[name='withdraw-price']").css("color", "#CF304A");
+                $("div.price-notice").css("display", "block");
+                $(".total > .fee-amount").text("Calculating...");
+                return false;
+            } else {
+                $("button.button-next").css("opacity", "1");
+                $("button.button-next").css("pointer-events", "all");
+                $("input[name='withdraw-price']").css("outline-color", "#F99A23");
+                $("input[name='withdraw-price']").css("color", "#000");
+                $("div.price-notice").css("display", "none");
                 $("input[name='withdraw-price']").val($.number(btc_current_parse * input_val_parse, 2) + " USD");
             }
 
@@ -173,15 +191,15 @@ $(document).ready(function() {
                 $("button.button-next").css("pointer-events", "none");
                 $("input[name='withdraw-amount']").css("outline-color", "#CF304A");
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
-                $("div.amount-notices").css("color", "#CF304A");
-                $("div.amount-notices").css("display", "block");
+                $("div.balance-notice").css("color", "#CF304A");
+                $("div.balance-notice").css("display", "block");
                 return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
                 $("input[name='withdraw-amount']").css("color", "");
-                $("div.amount-notices").css("color", "");
-                $("div.amount-notices").css("display", "none");
+                $("div.balance-notice").css("color", "");
+                $("div.balance-notice").css("display", "none");
             }
 
             if ($("input[name='withdraw-address']").val() == "") {
@@ -221,7 +239,7 @@ $(document).ready(function() {
                     dataType: 'json',
                     data: {
                         withdraw_id: randString,
-                        amount: total_fee,
+                        net_amount: total_fee,
                         fee: fee,
                         address: address,
                         currency: 'btc'
@@ -229,7 +247,7 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
-                                '<div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(btc_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
+                                '<div class="header"><h1>CoinPAY - Withdraw Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + amount + '</span> BTC <span class="success-price">(' + $.number(btc_current * amount, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
                             );
 
                             $("button.fa-regular.fa-xmark").click(function() {
@@ -302,7 +320,7 @@ $(document).ready(function() {
 
 
         $("body").append(
-            '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance eth"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".balance-amount.eth").attr("data-eth-balance") + ' ETH</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 ETH"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices">Invalid or Insufficent Balance</div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter ETH Address"></div><div class="address-notices">Please ensure this address is a valid Ethereum (ETH) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 ETH</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="0" title="0.000000000000000000 ETH">0.00000000 ETH</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" data-fee-amount="0">0.00000000 ETH</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
+            '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance eth"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".balance-amount.eth").attr("data-eth-balance") + ' ETH</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 ETH"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices"><div class="balance-notice">Invalid or Insufficent Balance</div><div class="price-notice">Min withdraw amount is $50</div></div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter ETH Address"></div><div class="address-notices">Please ensure this address is a valid Ethereum (ETH) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 ETH</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="0" title="0.000000000000000000 ETH">0.00000000 ETH</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" data-fee-amount="0">0.00000000 ETH</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
         );
 
         $("button.fa-regular.fa-xmark").click(function() {
@@ -335,14 +353,31 @@ $(document).ready(function() {
                 $("button.button-next").css("pointer-events", "none");
                 $("input[name='withdraw-amount']").css("outline-color", "#CF304A");
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
-                $("div.amount-notices").css("display", "block");
+                $("div.balance-notice").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
                 $("input[name='withdraw-amount']").css("outline-color", "#F99A23");
                 $("input[name='withdraw-amount']").css("color", "#000");
-                $("div.amount-notices").css("display", "none");
+                $("div.balance-notice").css("display", "none");
+                $("input[name='withdraw-price']").val($.number(eth_current_parse * input_val_parse, 2) + " USD");
+            }
+
+            if ($.number(eth_current_parse * input_val_parse, 2) < min_withdraw_amount) {
+                $("button.button-next").css("opacity", "0.5");
+                $("button.button-next").css("pointer-events", "none");
+                $("input[name='withdraw-price']").css("outline-color", "#CF304A");
+                $("input[name='withdraw-price']").css("color", "#CF304A");
+                $("div.price-notice").css("display", "block");
+                $(".total > .fee-amount").text("Calculating...");
+                return false;
+            } else {
+                $("button.button-next").css("opacity", "1");
+                $("button.button-next").css("pointer-events", "all");
+                $("input[name='withdraw-price']").css("outline-color", "#F99A23");
+                $("input[name='withdraw-price']").css("color", "#000");
+                $("div.price-notice").css("display", "none");
                 $("input[name='withdraw-price']").val($.number(eth_current_parse * input_val_parse, 2) + " USD");
             }
 
@@ -385,15 +420,15 @@ $(document).ready(function() {
                 $("button.button-next").css("pointer-events", "none");
                 $("input[name='withdraw-amount']").css("outline-color", "#CF304A");
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
-                $("div.amount-notices").css("color", "#CF304A");
-                $("div.amount-notices").css("display", "block");
+                $("div.balance-notice").css("color", "#CF304A");
+                $("div.balance-notice").css("display", "block");
                 return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
                 $("input[name='withdraw-amount']").css("color", "");
-                $("div.amount-notices").css("color", "");
-                $("div.amount-notices").css("display", "none");
+                $("div.balance-notice").css("color", "");
+                $("div.balance-notice").css("display", "none");
             }
 
             if ($("input[name='withdraw-address']").val() == "") {
@@ -435,7 +470,7 @@ $(document).ready(function() {
                     dataType: 'json',
                     data: {
                         withdraw_id: randString,
-                        amount: total_fee,
+                        net_amount: total_fee,
                         fee: fee,
                         address: address,
                         currency: 'eth'
@@ -443,7 +478,7 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
-                                '<div class="header"><h1>CoinPAY - Withdraw Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> BTC <span class="success-price">(' + $.number(eth_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
+                                '<div class="header"><h1>CoinPAY - Withdraw Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + amount + '</span> BTC <span class="success-price">(' + $.number(eth_current * amount, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
                             );
 
                             $("button.fa-regular.fa-xmark").click(function() {
@@ -515,7 +550,7 @@ $(document).ready(function() {
         }).join('');
 
         $("body").append(
-            '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance usdt"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".balance-amount.usdt").attr("data-usdt-balance") + ' USDT</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 USDT"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices">Invalid or Insufficent Balance</div><div class="insufficent-eth">ETH amount is not enough for the network fee </div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter USDT Address"></div><div class="address-notices">Please ensure this address is a valid Tether (USDT) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
+            '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance usdt"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".balance-amount.usdt").attr("data-usdt-balance") + ' USDT</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 USDT"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices"><div class="balance-notice">Invalid or Insufficent Balance</div><div class="price-notice">Min withdraw amount is $50</div></div><div class="insufficent-eth">ETH amount is not enough for the network fee </div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter USDT Address"></div><div class="address-notices">Please ensure this address is a valid Tether (USDT) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
         );
 
         $("button.fa-regular.fa-xmark").click(function() {
@@ -548,14 +583,30 @@ $(document).ready(function() {
                 $("button.button-next").css("pointer-events", "none");
                 $("input[name='withdraw-amount']").css("outline-color", "#CF304A");
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
-                $("div.amount-notices").css("display", "block");
+                $("div.balance-notice").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
                 $("input[name='withdraw-amount']").css("outline-color", "#F99A23");
                 $("input[name='withdraw-amount']").css("color", "#000");
-                $("div.amount-notices").css("display", "none");
+                $("div.balance-notice").css("display", "none");
+                $("input[name='withdraw-price']").val($.number(usdt_current_parse * input_val_parse, 2) + " USD");
+            }
+
+            if ($(".network-fee > .fee-amount").attr("data-fee-amount") > eth_balance) {
+                $("button.button-next").css("opacity", "0.5");
+                $("button.button-next").css("pointer-events", "none");
+                $("input[name='withdraw-amount']").css("outline-color", "#CF304A");
+                $("input[name='withdraw-amount']").css("color", "#CF304A");
+                $("div.insufficent-eth").css("display", "block");
+                $(".total > .fee-amount").text("Calculating...");
+            } else {
+                $("button.button-next").css("opacity", "1");
+                $("button.button-next").css("pointer-events", "all");
+                $("input[name='withdraw-amount']").css("outline-color", "#F99A23");
+                $("input[name='withdraw-amount']").css("color", "#000");
+                $("div.insufficent-eth").css("display", "none");
                 $("input[name='withdraw-price']").val($.number(usdt_current_parse * input_val_parse, 2) + " USD");
             }
 
@@ -614,15 +665,15 @@ $(document).ready(function() {
                 $("button.button-next").css("pointer-events", "none");
                 $("input[name='withdraw-amount']").css("outline-color", "#CF304A");
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
-                $("div.amount-notices").css("color", "#CF304A");
-                $("div.amount-notices").css("display", "block");
+                $("div.balance-notice").css("color", "#CF304A");
+                $("div.balance-notice").css("display", "block");
                 return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
                 $("input[name='withdraw-amount']").css("color", "");
-                $("div.amount-notices").css("color", "");
-                $("div.amount-notices").css("display", "none");
+                $("div.balance-notice").css("color", "");
+                $("div.balance-notice").css("display", "none");
             }
 
             if ($("input[name='withdraw-address']").val() == "") {
@@ -662,7 +713,7 @@ $(document).ready(function() {
                     dataType: 'json',
                     data: {
                         withdraw_id: randString,
-                        amount: total_fee,
+                        net_amount: total_fee,
                         eth_fee: eth_network_fee,
                         coinpay_fee: coinpay_fee,
                         address: address,
@@ -671,7 +722,7 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
-                                '<div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + total_fee.toFixed(8) + '</span> USDT <span class="success-price">(' + $.number(usdt_current * total_fee, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
+                                '<div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + amount + '</span> USDT <span class="success-price">(' + $.number(usdt_current * amount, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to balances</button></div>'
                             );
 
                             $("button.fa-regular.fa-xmark").click(function() {

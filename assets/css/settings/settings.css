@@ -132,6 +132,10 @@
     font-size: 16px;
 }
 
+.page .account-information .settings-card .list-group .list-group-item .settings-panel .settings-section .settings-section-item .section-item-field .input.avatar {
+    display: none;
+}
+
 .page .account-information .settings-card .list-group .list-group-item .settings-panel .settings-section .settings-section-item .section-item-field input:focus {
     border: none;
     outline: 1px #F99A23;

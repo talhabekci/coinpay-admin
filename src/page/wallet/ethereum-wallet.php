@@ -60,7 +60,7 @@ $tx_number = mysqli_num_rows($tx_result);
             if ($tx_number <= 0) {
                 ?>
                 <div class="no-transaction">
-                    <svg class="no-tx-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" class="mirror css-1tx71v4">
+                    <svg class="no-tx-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M64 8H26v80h58V28H64V8zM36 37h38v4H36v-4zm0 9h38v4H36v-4zm38 9H36v4h38v-4zm-8 12l4 4-4 4-4-4 4-4zM50 18l-3 3 3 3 3-3-3-3z" fill="url(#not-found-data_svg__paint0_linear_22059_32288)"></path>
                         <path opacity="0.3" d="M86 50l3-3 3 3-3 3-3-3zM47 21l3-3 3 3-3 3-3-3zM84 28H64V8l20 20z" fill="#F99A23"></path>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.172 73.171l14.5-14.5 5.656 5.658-14.5 14.5-5.656-5.657z" fill="url(#not-found-data_svg__paint1_linear_22059_32288)"></path>
@@ -68,15 +68,15 @@ $tx_number = mysqli_num_rows($tx_result);
                             fill="url(#not-found-data_svg__paint2_linear_22059_32288)"></path>
                         <defs>
                             <linearGradient id="not-found-data_svg__paint0_linear_22059_32288" x1="55" y1="8" x2="55" y2="88" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#F99A23" stop-opacity="0.1"></stop>
+                                <stop offset="0" stop-color="#F99A23" stop-opacity="0.1"></stop>
                                 <stop offset="1" stop-color="#F99A23" stop-opacity="0.25"></stop>
                             </linearGradient>
                             <linearGradient id="not-found-data_svg__paint1_linear_22059_32288" x1="4.172" y1="68.75" x2="24.328" y2="68.75" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#F99A23"></stop>
+                                <stop offset="0" stop-color="#F99A23"></stop>
                                 <stop offset="1" stop-color="#F99A23"></stop>
                             </linearGradient>
                             <linearGradient id="not-found-data_svg__paint2_linear_22059_32288" x1="15" y1="48" x2="55" y2="48" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#F99A23"></stop>
+                                <stop offset="0" stop-color="#F99A23"></stop>
                                 <stop offset="1" stop-color="#F99A23"></stop>
                             </linearGradient>
                         </defs>

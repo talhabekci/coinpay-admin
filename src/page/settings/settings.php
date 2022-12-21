@@ -52,7 +52,12 @@ $user_info = mysqli_fetch_array($result);
                                     <div class="settings-section-item">
                                         <div class="section-item-label">Profile Avatar</div>
                                         <div class="section-item-field">
-                                            <input type="file" name="avatar" id="avatar" class="input avatar" value="<?=$user_info["user_avatar"]?>">
+                                            <div class="avatar-pic">
+                                                <label>
+                                                    <input type="file" name="avatar" id="avatar" class="input avatar" value="<?=$user_info["user_avatar"]?>">
+                                                    <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/avatars/<?=$_SESSION["avatar"]?>" alt="Avatar" width="100" height="100">
+                                                </label>
+                                            </div>
                                             <div class="error-message avatar"></div>
                                         </div>
                                     </div>

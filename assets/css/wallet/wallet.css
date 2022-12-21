@@ -11,6 +11,10 @@
     color: #616471;
 }
 
+.fa-regular.fa-wallet {
+    margin-right:10px;
+}
+
 .page .balances {
     margin: 1.5rem 3rem;
     display: flex;
@@ -87,6 +91,10 @@
     vertical-align: middle;
 }
 
+.page .balances .balances-table .balances-table-body .balances-table-row:hover {
+    background-color: #F7F8F9;
+}
+
 .page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body {
     display: table-cell;
     padding: 16px;
@@ -96,6 +104,18 @@
     line-height: 1.43;
     border-bottom: 1px solid #5b616e33;
     vertical-align: inherit;
+}
+
+.page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body.btc {
+    cursor:pointer;
+}
+
+.page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body.eth {
+    cursor:pointer;
+}
+
+.page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body.usdt {
+    cursor:pointer;
 }
 
 .page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body .cell-body-div-name {

@@ -9,12 +9,10 @@ $.ajax({
     },
     dataType: "json",
     success: function(response) {
-        console.log(response)
         host_name = response["ip_address"]
     }
 });
 
-//console.log(host_name);
 
 $.ajax({
     type: 'GET',

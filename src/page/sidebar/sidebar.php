@@ -26,7 +26,7 @@ if ($result == false) {
         </li>
         <li class="submenu">
             <a href="http://<?=$host_name["ip_address"]?>/coinpay-admin/wallet">
-                <i class="fa-regular fa-money-bills-simple"></i>
+            <i class="fa-regular fa-wallet"></i>
                 <span class="links_name">Wallet</span>
             </a>
             <i class="fa-regular fa-chevron-down"></i>

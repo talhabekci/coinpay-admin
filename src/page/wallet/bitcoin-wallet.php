@@ -45,7 +45,7 @@ $tx_number = mysqli_num_rows($tx_result);
     <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/bitcoin-wallet.js"></script>
     <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/number-format.js"></script>
     <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/wallet-address-validator.min.js"></script>
-    <title>CoinPay Wallet</title>
+    <title>CoinPay Bitcoin Wallet</title>
 </head>
 
 <body>

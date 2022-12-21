@@ -46,7 +46,10 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
 <body>
     <?php include("src/page/sidebar/sidebar.php"); ?>
     <div class="page">
-        <div class="page_title">Wallet</div>
+        <div class="page_title">
+        <i class="fa-regular fa-wallet"></i>
+        <span>Wallet</span>
+        </div>
         <div class="balances">
             <table class="balances-table">
                 <thead class="balances-table-head">
@@ -68,8 +71,8 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
                     </tr>
                 </thead>
                 <tbody class="balances-table-body">
-                    <tr class="balances-table-row btc">
-                        <td class="balances-table-cell-body">
+                    <tr class="balances-table-row">
+                        <td class="balances-table-cell-body btc">
                             <div class="cell-body-div-name">
                                 <div class="cell-body-img">
                                     <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/btc.png" width="32" height="32" alt="Bitcoin">
@@ -78,8 +81,8 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
                                 <p class="cell-body-text">Bitcoin</p>
                             </div>
                         </td>
-                        <td class="balances-table-cell-body"></td>
-                        <td class="balances-table-cell-body">
+                        <td class="balances-table-cell-body btc"></td>
+                        <td class="balances-table-cell-body btc">
                             <div class="cell-body-div-balance">
                                 <div class="cell-body-div-balance-text">
                                     <p class="balance-amount btc" data-btc-balance="<?=number_format($_SESSION["btc_balance"], 8, '.', ',')?>"><?=number_format($_SESSION["btc_balance"], 8, '.', ',')?> BTC</p>
@@ -97,7 +100,7 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
                         </td>
                     </tr>
                     <tr class="balances-table-row">
-                        <td class="balances-table-cell-body">
+                        <td class="balances-table-cell-body eth">
                             <div class="cell-body-div-name">
                                 <div class="cell-body-img">
                                     <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/eth.svg" width="32" height="32" alt="Bitcoin">
@@ -106,8 +109,8 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
                                 <p class="cell-body-text">Ethereum</p>
                             </div>
                         </td>
-                        <td class="balances-table-cell-body"></td>
-                        <td class="balances-table-cell-body">
+                        <td class="balances-table-cell-body eth"></td>
+                        <td class="balances-table-cell-body eth">
                             <div class="cell-body-div-balance">
                                 <div class="cell-body-div-balance-text">
                                     <p class="balance-amount eth" data-eth-balance="<?=number_format($_SESSION["eth_balance"], 8, '.', ',')?>"><?=number_format($_SESSION["eth_balance"], 8, '.', ',');?> ETH</p>
@@ -125,7 +128,7 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
                         </td>
                     </tr>
                     <tr class="balances-table-row">
-                        <td class="balances-table-cell-body">
+                        <td class="balances-table-cell-body usdt">
                             <div class="cell-body-div-name">
                                 <div class="cell-body-img">
                                     <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/usdt.svg" width="32" height="32" alt="Bitcoin">
@@ -134,8 +137,8 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
                                 <p class="cell-body-text">Tether</p>
                             </div>
                         </td>
-                        <td class="balances-table-cell-body"></td>
-                        <td class="balances-table-cell-body">
+                        <td class="balances-table-cell-body usdt"></td>
+                        <td class="balances-table-cell-body usdt">
                             <div class="cell-body-div-balance">
                                 <div class="cell-body-div-balance-text">
                                     <p class="balance-amount usdt" data-usdt-balance="<?=number_format($_SESSION["usdt_balance"], 8, '.', ',')?>"><?=number_format($_SESSION["usdt_balance"], 2, '.', ',')?> USDT</p>

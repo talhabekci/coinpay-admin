@@ -2,14 +2,14 @@
 
 session_start();
 
-if (!isset($_POST["withdraw_id"], $_POST["amount"], $_POST["address"], $_POST["currency"])) {
+if (!isset($_POST["withdraw_id"], $_POST["net_amount"], $_POST["address"], $_POST["currency"])) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error occurred. Missing value"]]));
 }
 
 require 'config.php';
 
 $withdraw_id = $_POST["withdraw_id"];
-$amount = $_POST["amount"];
+$net_amount = $_POST["net_amount"];
 $address = $_POST["address"];
 $currency = $_POST["currency"];
 $btc_balance = $_SESSION["btc_balance"];
@@ -20,18 +20,18 @@ if ($currency == "btc") {
 
     $fee = $_POST["fee"];
 
-    if ($amount > $btc_balance) {
+    if ($net_amount > $btc_balance) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
     }
 
-    $net_amount = $amount + $fee;
+    $amount = $net_amount - $fee;
 
     $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
 
-    $new_balance = $btc_balance - $amount;
+    $new_balance = $btc_balance - $net_amount;
 
     $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
     if ($result == false) {
@@ -52,18 +52,18 @@ if ($currency == "btc") {
 
     $fee = $_POST["fee"];
 
-    if ($amount > $eth_balance) {
+    if ($net_amount > $eth_balance) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
     }
 
-    $net_amount = $amount + $fee;
+    $amount = $net_amount - $fee;
 
     $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
 
-    $new_balance = $eth_balance - $amount;
+    $new_balance = $eth_balance - $net_amount;
 
     $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
     if ($result == false) {
@@ -85,18 +85,18 @@ if ($currency == "btc") {
     $eth_fee = $_POST["eth_fee"];
     $coinpay_fee = $_POST["coinpay_fee"];
 
-    if ($amount > $usdt_balance) {
+    if ($net_amount > $usdt_balance) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
     }
 
-    $net_amount = $amount + $coinpay_fee;
+    $amount = $net_amount - $coinpay_fee;
 
     $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$coinpay_fee."', '".$net_amount."', '".$currency."', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
 
-    $new_balance = $usdt_balance - $amount;
+    $new_balance = $usdt_balance - $net_amount;
 
     $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt' ");
     if ($result == false) {

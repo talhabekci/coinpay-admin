@@ -116,14 +116,18 @@
 
 .page .tether-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+}
+
+.page .tether-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body .total-amount {
+    font-size: 22px;
+    margin-right: 10px;
 }
 
 .page .tether-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body .total-balance {
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 5px;
-    text-align: left;
+    font-size: 22px;
+    opacity: 0.5;
+    font-weight: bold;
 }
 
 .page .tether-wallet .wallet-table .wallet-table-head .wallet-table-row .wallet-table-cell .wallet-table-cell-div .total-balance-body .balance-text {

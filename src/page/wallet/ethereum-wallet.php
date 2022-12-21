@@ -44,7 +44,7 @@ $tx_number = mysqli_num_rows($tx_result);
     <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/ethereum-wallet.js"></script>
     <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/number-format.js"></script>
     <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/wallet/wallet-address-validator.min.js"></script>
-    <title>CoinPay Wallet</title>
+    <title>CoinPay Ethereum Wallet</title>
 </head>
 
 <body>
@@ -92,8 +92,8 @@ $tx_number = mysqli_num_rows($tx_result);
                         <th class="wallet-table-cell" scope="col" colspan="4">
                             <div class="wallet-table-cell-div">
                                 <div class="total-balance-body">
-                                    <p class="total-balance">$ <?=number_format(bcmul($eth_current["USD"], $_SESSION["eth_balance"], 2), 2, '.', ',')?></p>
-                                    <p class="balance-text">Available Balance</p>
+                                    <p class="total-amount" data-total-amount="<?=$_SESSION["eth_balance"]?>"><?=$_SESSION["eth_balance"]?> ETH</p>
+                                    <p class="total-balance"> ≈ $<?=number_format(bcmul($eth_current["USD"], $_SESSION["eth_balance"], 2), 2, '.', ',')?></p>
                                 </div>
                                 <div class="wallet-action-div">
                                     <input class="wallet-action-input deposit" type="submit" name="deposit" value="Deposit">

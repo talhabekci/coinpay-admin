@@ -106,7 +106,20 @@ div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-inputs>inpu
     outline-style: solid;
 }
 
-div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-notices, div.insufficent-eth {
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-notices{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-notices > div.balance-notice,div.insufficent-eth {
+    display: none;
+    font-size: 14px;
+    padding: 5px 0px;
+    color: #CF304A;
+}
+
+div.container>div.modal>div.withdraw-form>form>div.amount>div.amount-notices>div.price-notice {
     display: none;
     font-size: 14px;
     padding: 5px 0px;

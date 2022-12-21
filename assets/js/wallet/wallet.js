@@ -15,6 +15,18 @@ $(document).ready(function() {
         }
     });
 
+    $(".balances-table-cell-body.btc").click(function() {
+        window.open ("http://" + host_name + "/coinpay-admin/wallet/bitcoin-wallet/", "_blank");
+    });
+
+    $(".balances-table-cell-body.eth").click(function() {
+        window.open ("http://" + host_name + "/coinpay-admin/wallet/ethereum-wallet/", "_blank");
+    });
+
+    $(".balances-table-cell-body.usdt").click(function() {
+        window.open ("http://" + host_name + "/coinpay-admin/wallet/tether-wallet/", "_blank");
+    });
+
     const web3 = new Web3('ws://192.168.1.90:8546');
 
     var btc_network_fee_usd = 0;

@@ -28,7 +28,7 @@ function bchexdec($hex) {
 // }
 
 //Bitcoin Block Confirmation
-$result = mysqli_query($open, "SELECT `txid`, `order_id`  FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'btc' AND `is_wallet` = 'no'  ");
+$result = mysqli_query($open, "SELECT `user_id`, `txid`, `order_id`  FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'btc' AND `is_wallet` = 'no' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
 }
@@ -37,7 +37,7 @@ foreach ($result as $txid) {
 
     $gettransaction = request("gettransaction", [$txid["txid"]]);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$gettransaction["result"]["confirmations"]."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$gettransaction["result"]["confirmations"]."', `user_id` = '".$txid["user_id"]."' WHERE `txid` = '".$txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -53,7 +53,7 @@ foreach ($result as $txid) {
 
             if ($details["category"] == "receive") {
 
-                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$txid["user_id"]."' AND `currency` = 'btc' ");
                 if ($result == FALSE) {
                     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
                 }
@@ -71,12 +71,12 @@ foreach ($result as $txid) {
 
                 $new_balance = $user_balance["amount"] + $order_amount["net_amount"];
 
-                $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+                $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$txid["user_id"]."' AND `currency` = 'btc' ");
                 if ($result == FALSE) {
                     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
                 }
 
-                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$txid["user_id"]."' AND `currency` = 'btc' ");
                 if ($result == FALSE) {
                     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
                 }
@@ -93,7 +93,7 @@ foreach ($result as $txid) {
 }
 
 //Bitcoin Wallet Depsoit Block Confirmation
-$result = mysqli_query($open, "SELECT `txid`, `order_id`  FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'btc' AND `is_wallet` = 'yes'  ");
+$result = mysqli_query($open, "SELECT `user_id`, `txid`, `order_id`  FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'btc' AND `is_wallet` = 'yes' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
 }
@@ -102,7 +102,7 @@ foreach ($result as $deposit_txid) {
 
     $gettransaction = request("gettransaction", [$deposit_txid["txid"]]);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$gettransaction["result"]["confirmations"]."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$deposit_txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$gettransaction["result"]["confirmations"]."', `user_id` = '".$deposit_txid["user_id"]."' WHERE `txid` = '".$deposit_txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -120,7 +120,7 @@ foreach ($result as $deposit_txid) {
 
                 $deposit_amount = 0;
 
-                $result = mysqli_query($open, "SELECT `address`  FROM `cp_addresses` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+                $result = mysqli_query($open, "SELECT `address`  FROM `cp_addresses` WHERE `user_id` = '".$deposit_txid["user_id"]."' AND `currency` = 'btc' ");
                 if ($result == FALSE) {
                     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
                 }
@@ -133,7 +133,7 @@ foreach ($result as $deposit_txid) {
 
                 }
 
-                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$deposit_txid["user_id"]."' AND `currency` = 'btc' ");
                 if ($result == FALSE) {
                     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
                 }
@@ -144,12 +144,12 @@ foreach ($result as $deposit_txid) {
                 $new_deposit_balance = $user_balance["amount"] + $deposit_amount;
                 // echo "New Balance: " . number_format($new_balance, 8, '.');
 
-                $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".number_format($new_deposit_balance, 8, '.')."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+                $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".number_format($new_deposit_balance, 8, '.')."' WHERE `user_id` = '".$deposit_txid["user_id"]."' AND `currency` = 'btc' ");
                 if ($result == FALSE) {
                     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
                 }
 
-                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+                $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$deposit_txid["user_id"]."' AND `currency` = 'btc' ");
                 if ($result == FALSE) {
                     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
                 }
@@ -167,7 +167,7 @@ foreach ($result as $deposit_txid) {
 
 
 // Ethereum Receive Block Confirmation
-$result = mysqli_query($open, "SELECT `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'eth' AND `type` = 0 AND `is_wallet` = 'no' ");
+$result = mysqli_query($open, "SELECT `user_id`, `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'eth' AND `type` = 0 AND `is_wallet` = 'no' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
 }
@@ -184,7 +184,7 @@ foreach ($result as $eth_txid) {
 
     $blockConfirmation = bcsub($currentBlockNumber, $blockNumber, 0);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$eth_txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$eth_txid["user_id"]."' WHERE `txid` = '".$eth_txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -196,7 +196,7 @@ foreach ($result as $eth_txid) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$eth_txid["user_id"]."' AND `currency` = 'eth' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -214,12 +214,12 @@ foreach ($result as $eth_txid) {
 
         $new_eth_balance = $user_eth_balance["amount"] + $eth_order_amount["net_amount"];
 
-        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_eth_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth ' ");
+        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_eth_balance."' WHERE `user_id` = '".$eth_txid["user_id"]."' AND `currency` = 'eth ' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$eth_txid["user_id"]."' AND `currency` = 'eth' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -233,7 +233,7 @@ foreach ($result as $eth_txid) {
 }
 
 // Ethereum Wallet Deposit Block Confirmation
-$result = mysqli_query($open, "SELECT `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'eth' AND `type` = 0 AND `is_wallet` = 'yes' ");
+$result = mysqli_query($open, "SELECT `user_id`, `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'eth' AND `type` = 0 AND `is_wallet` = 'yes' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
 }
@@ -250,7 +250,7 @@ foreach ($result as $eth_deposit_txid) {
 
     $blockConfirmation = bcsub($currentBlockNumber, $blockNumber, 0);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$eth_deposit_txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$eth_deposit_txid["user_id"]."' WHERE `txid` = '".$eth_deposit_txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -262,7 +262,7 @@ foreach ($result as $eth_deposit_txid) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$eth_deposit_txid["user_id"]."' AND `currency` = 'eth' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -274,12 +274,12 @@ foreach ($result as $eth_deposit_txid) {
 
         $new_eth_deposit_balance = $user_eth_balance["amount"] + $eth_deposit_amount;
         // echo "New Balance: " . $new_eth_balance;
-        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_eth_deposit_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth ' ");
+        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_eth_deposit_balance."' WHERE `user_id` = '".$eth_deposit_txid["user_id"]."' AND `currency` = 'eth ' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$eth_deposit_txid["user_id"]."' AND `currency` = 'eth' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -293,7 +293,7 @@ foreach ($result as $eth_deposit_txid) {
 }
 
 //Ethereum Wihdraw Block Confirmation
-$result = mysqli_query($open, "SELECT `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'eth' AND `type` = 1 ");
+$result = mysqli_query($open, "SELECT `user_id`, `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'eth' AND `type` = 1 ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
 }
@@ -329,7 +329,7 @@ foreach ($result as $eth_send_txid) {
 
 
 //Tether Receive Block Confirmation
-$result = mysqli_query($open, "SELECT `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'usdt' AND `type` = 0 AND `is_wallet` = 'no' ");
+$result = mysqli_query($open, "SELECT `user_id`, `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'usdt' AND `type` = 0 AND `is_wallet` = 'no' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
 }
@@ -346,7 +346,7 @@ foreach ($result as $usdt_txid) {
 
     $blockConfirmation = bcsub($currentBlockNumber, $blockNumber, 0);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$usdt_txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$usdt_txid["user_id"]."' WHERE `txid` = '".$usdt_txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -358,7 +358,7 @@ foreach ($result as $usdt_txid) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$usdt_txid["user_id"]."' AND `currency` = 'usdt' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -376,12 +376,12 @@ foreach ($result as $usdt_txid) {
 
         $new_usdt_balance = $user_usdt_balance["amount"] + $usdt_order_amount["net_amount"];
 
-        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_usdt_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt ' ");
+        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_usdt_balance."' WHERE `user_id` = '".$usdt_txid["user_id"]."' AND `currency` = 'usdt ' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$usdt_txid["user_id"]."' AND `currency` = 'usdt' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -394,7 +394,7 @@ foreach ($result as $usdt_txid) {
 }
 
 // Tether Wallet Deposit Block Confirmation
-$result = mysqli_query($open, "SELECT `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'usdt' AND `type` = 0 AND `is_wallet` = 'yes' ");
+$result = mysqli_query($open, "SELECT `user_id`, `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'usdt' AND `type` = 0 AND `is_wallet` = 'yes' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
 }
@@ -411,7 +411,7 @@ foreach ($result as $usdt_deposit_txid) {
 
     $blockConfirmation = bcsub($currentBlockNumber, $blockNumber, 0);
 
-    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$_SESSION["user_id"]."' WHERE `txid` = '".$usdt_deposit_txid["txid"]."' ");
+    $result = mysqli_query($open, "UPDATE `cp_transactions` SET `confirmation` = '".$blockConfirmation."', `user_id` = '".$usdt_deposit_txid["user_id"]."' WHERE `txid` = '".$usdt_deposit_txid["txid"]."' ");
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
     }
@@ -423,7 +423,7 @@ foreach ($result as $usdt_deposit_txid) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$usdt_deposit_txid["user_id"]."' AND `currency` = 'usdt' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -435,12 +435,12 @@ foreach ($result as $usdt_deposit_txid) {
 
         $new_usdt_deposit_balance = $user_usdt_balance["amount"] + $usdt_deposit_amount;
 
-        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_usdt_deposit_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt ' ");
+        $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_usdt_deposit_balance."' WHERE `user_id` = '".$usdt_deposit_txid["user_id"]."' AND `currency` = 'usdt ' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
         }
 
-        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt' ");
+        $result = mysqli_query($open, "SELECT `amount`  FROM `cp_balances` WHERE `user_id` = '".$usdt_deposit_txid["user_id"]."' AND `currency` = 'usdt' ");
         if ($result == FALSE) {
             exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));
         }
@@ -452,7 +452,7 @@ foreach ($result as $usdt_deposit_txid) {
 
 }
 
-// //Tether Send Block Confirmation
+//Tether Send Block Confirmation
 $result = mysqli_query($open, "SELECT `txid`, `order_id` FROM `cp_transactions` WHERE `confirmation` < 6 AND `status` = 0 AND `currency` = 'usdt' AND `type` = 1 ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while selecting data" . mysqli_error($open)]]));

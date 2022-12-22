@@ -134,6 +134,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
                 $("div.balance-notice").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
@@ -173,6 +174,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-address']").css("color", "#000");
                 $("div.address-notices").text("Please ensure this address is a valid Bitcoin (BTC) address");
                 $("div.address-notices").css("color", "#0009");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "0.5");
                 $("button.button-next").css("pointer-events", "none");
@@ -286,7 +288,11 @@ $(document).ready(function() {
         });
 
         $("body").append('<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Deposit Bitcoin</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="main"><div class="img-qr"><img class="qr" width="300" height="300" src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + address + '" alt=""></div><div class="text"><label id="label" for="">Address</label><div class="aaddress">' + address + ' <i class="fa-regular fa-clipboard"></i></div></div></div></div></div>');
-
+        tippy('.fa-regular.fa-clipboard', {
+            content: 'Click to copy',
+            animation: 'fade',
+            placement: 'top'
+        });
         $("button.fa-regular.fa-xmark").click(function() {
 
             $(".container").remove();
@@ -322,7 +328,7 @@ $(document).ready(function() {
         $("body").append(
             '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance eth"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".balance-amount.eth").attr("data-eth-balance") + ' ETH</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 ETH"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices"><div class="balance-notice">Invalid or Insufficent Balance</div><div class="price-notice">Min withdraw amount is $50</div></div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter ETH Address"></div><div class="address-notices">Please ensure this address is a valid Ethereum (ETH) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 ETH</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="0" title="0.000000000000000000 ETH">0.00000000 ETH</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" data-fee-amount="0">0.00000000 ETH</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
         );
-
+        
         $("button.fa-regular.fa-xmark").click(function() {
 
             $(".container").remove();
@@ -355,6 +361,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
                 $("div.balance-notice").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
@@ -394,6 +401,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-address']").css("color", "#000");
                 $("div.address-notices").text("Please ensure this address is a valid Ethereum (ETH) address");
                 $("div.address-notices").css("color", "#0009");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "0.5");
                 $("button.button-next").css("pointer-events", "none");
@@ -516,7 +524,11 @@ $(document).ready(function() {
         });
 
         $("body").append('<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Deposit Ethereum</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="main"><div class="img-qr"><img class="qr" width="300" height="300" src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + address + '" alt=""></div><div class="text"><label id="label" for="">Address</label><div class="aaddress">' + address + ' <i class="fa-regular fa-clipboard"></i></div></div></div></div></div>');
-
+        tippy('.fa-regular.fa-clipboard', {
+            content: 'Click to copy',
+            animation: 'fade',
+            placement: 'top'
+        });
         $("button.fa-regular.fa-xmark").click(function() {
 
             $(".container").remove();
@@ -585,6 +597,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
                 $("div.balance-notice").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
@@ -601,6 +614,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
                 $("div.insufficent-eth").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
@@ -617,6 +631,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-amount']").css("color", "#CF304A");
                 $("div.insufficent-eth").css("display", "block");
                 $(".total > .fee-amount").text("Calculating...");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "1");
                 $("button.button-next").css("pointer-events", "all");
@@ -639,6 +654,7 @@ $(document).ready(function() {
                 $("input[name='withdraw-address']").css("color", "#000");
                 $("div.address-notices").text("Please ensure this address is a valid Tether (USDT) address");
                 $("div.address-notices").css("color", "#0009");
+                return false;
             } else {
                 $("button.button-next").css("opacity", "0.5");
                 $("button.button-next").css("pointer-events", "none");
@@ -761,7 +777,13 @@ $(document).ready(function() {
         });
 
         $("body").append('<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Deposit Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="main"><div class="img-qr"><img class="qr" width="300" height="300" src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + address + '" alt=""></div><div class="text"><label id="label" for="">Address</label><div class="aaddress">' + address + ' <i class="fa-regular fa-clipboard"></i></div></div></div></div></div>');
-
+        
+        tippy('.fa-regular.fa-clipboard', {
+            content: 'Click to copy',
+            animation: 'fade',
+            placement: 'top'
+        });
+        
         $("button.fa-regular.fa-xmark").click(function() {
 
             $(".container").remove();

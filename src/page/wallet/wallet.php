@@ -33,6 +33,8 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/sidebar/index.js"></script>
@@ -159,6 +161,13 @@ $usdt_current = request_to_url("http://".$host_name["ip_address"]."/coinpay/src/
             </table>
         </div>
     </div>
+    <script type="text/javascript">
+        tippy('.fa-regular.fa-clipboard', {
+                    content: 'Click to copy',
+                    animation: 'fade',
+                    placement: 'top'
+                });
+    </script>
 </body>
 
 </html>

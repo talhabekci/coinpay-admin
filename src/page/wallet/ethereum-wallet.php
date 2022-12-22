@@ -168,7 +168,7 @@ $tx_number = mysqli_num_rows($tx_result);
                                         }elseif ($transactions["status"] == "2") {
                                             ?>
                                             <p class="status" style="color: rgb(3, 166, 109);">
-                                                <span>Complated</span>
+                                                <span>Completed</span>
                                                 <i class="fa-regular fa-check"></i>
                                             </p>
                                             <?php

@@ -93,5 +93,3 @@ if ($_POST["currency"] == "btc") {
     }
 
 }
-
-?>

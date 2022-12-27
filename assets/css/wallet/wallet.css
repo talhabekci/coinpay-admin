@@ -12,7 +12,7 @@
 }
 
 .fa-regular.fa-wallet {
-    margin-right:10px;
+    margin-right: 10px;
 }
 
 .page .balances {
@@ -107,15 +107,15 @@
 }
 
 .page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body.btc {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body.eth {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body.usdt {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body .cell-body-div-name {
@@ -174,9 +174,23 @@
     font-size: 16px;
 }
 
-.page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body .cell-body-div-action .cell-body-div-action-text .action-name.deposit-btc, .action-name.deposit-eth, .action-name.deposit-usdt {
+.page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body .cell-body-div-action .cell-body-div-action-text .action-name.deposit-btc,
+.action-name.deposit-eth,
+.action-name.deposit-usdt {
     margin-right: 20px;
     color: #F99A23;
+}
+
+.page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body .cell-body-div-action .cell-body-div-action-text .action-name.deposit-btc:hover,
+.action-name.deposit-eth:hover,
+.action-name.deposit-usdt:hover {
+    color: #FBB35B;
+}
+
+.page .balances .balances-table .balances-table-body .balances-table-row .balances-table-cell-body .cell-body-div-action .cell-body-div-action-text .action-name.withdraw-btc:hover,
+.action-name.withdraw-eth:hover,
+.action-name.withdraw-usdt:hover {
+    color: #434343;
 }
 
 /* modal ek css*/

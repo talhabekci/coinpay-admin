@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     var host_name = "";
 
@@ -10,7 +10,7 @@ $(document).ready(function() {
             data: "host_name"
         },
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             host_name = response["ip_address"]
         }
     });
@@ -23,7 +23,7 @@ $(document).ready(function() {
         type: "GET",
         url: "http://" + host_name + "/coinpay-admin/src/backend/payments-query.php",
         async: false,
-        success: function(response) {
+        success: function (response) {
             if (response["error"]) {
                 if (response["error"]["message"] == "There is no payment to show") {
                     $(".no-payment").css("display", "block");
@@ -45,7 +45,7 @@ $(document).ready(function() {
 
         var pwdChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         var pwdLen = 10;
-        var randString = Array(pwdLen).fill(pwdChars).map(function(x) {
+        var randString = Array(pwdLen).fill(pwdChars).map(function (x) {
             return x[Math.floor(Math.random() * x.length)]
         }).join('');
 
@@ -53,7 +53,7 @@ $(document).ready(function() {
 
     }
 
-    $('a[data-filter="InValid"]').click(function() {
+    $('a[data-filter="InValid"]').click(function () {
 
         $('a[data-filter="All"]').removeClass("active");
         $('a[data-filter="Valid"]').removeClass("active");
@@ -77,7 +77,7 @@ $(document).ready(function() {
         }
     });
 
-    $('a[data-filter="Valid"]').click(function() {
+    $('a[data-filter="Valid"]').click(function () {
 
         $('a[data-filter="All"]').removeClass("active");
         $('a[data-filter="InValid"]').removeClass("active");
@@ -101,7 +101,7 @@ $(document).ready(function() {
         }
     });
 
-    $('a[data-filter="Unresolved"]').click(function() {
+    $('a[data-filter="Unresolved"]').click(function () {
 
         $('a[data-filter="All"]').removeClass("active");
         $('a[data-filter="InValid"]').removeClass("active");

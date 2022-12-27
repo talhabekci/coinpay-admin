@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     var host_name = "";
 
@@ -10,12 +10,12 @@ $(document).ready(function() {
             data: "host_name"
         },
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             host_name = response["ip_address"]
         }
     });
 
-    $(".page > .page_title > i").click(function() {
+    $(".page > .page_title > i").click(function () {
         location.href = "http://" + host_name + "/coinpay-admin/wallet";
     });
 
@@ -34,14 +34,14 @@ $(document).ready(function() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://' + host_name + '/coinpay/src/usdtPrice/usdt-to-usd?totalPrice=1',
+        url: 'http://' + host_name + '/coinpay/usdt-to-usd/1',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
             usdt_current = response["USD"];
         }
     });
 
-    $(".wallet-action-input.withdraw").click(function() {
+    $(".wallet-action-input.withdraw").click(function () {
 
         var eth_balance = $("p.balance-amount.eth").attr("data-eth-balance");
         var total_fee = 0;
@@ -60,7 +60,7 @@ $(document).ready(function() {
 
         var pwdChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         var pwdLen = 10;
-        var randString = Array(pwdLen).fill(pwdChars).map(function(x) {
+        var randString = Array(pwdLen).fill(pwdChars).map(function (x) {
             return x[Math.floor(Math.random() * x.length)]
         }).join('');
 
@@ -68,7 +68,7 @@ $(document).ready(function() {
             '<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="total-balance usdt"><p class="balance-text">Total Balance</p><p class="balance-amount">' + $(".total-amount").attr("data-total-amount") + ' USDT</p></div><div class="withdraw-form"><form id="withdraw-form" method="post"><div class="amount"><div class="amount-label"><label for="withdraw-amount">AMOUNT TO WITHDRAW</label></div><div class="amount-inputs"><input type="text" pattern="[0-9]*" name="withdraw-amount" placeholder="0 USDT"><!----><i class="fa-regular fa-arrow-right-arrow-left"></i><!----><input type="text" name="withdraw-price" disabled placeholder="0.00 USD"></div><div class="amount-notices"><div class="balance-notice">Invalid or Insufficent Balance</div><div class="price-notice">Min withdraw amount is $50</div></div><div class="insufficent-eth">ETH amount is not enough for the network fee </div></div><div class="address"><div class="address-label"><label for="withdraw-address">ADDRESS</label></div><div class="address-inputs"><input type="text" name="withdraw-address" placeholder="Enter USDT Address"></div><div class="address-notices">Please ensure this address is a valid Tether (USDT) address</div></div></form></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" data-fee-amount="0">0.00000000 USDT</p></div></div><div class="next-button"><button type="submit" name="button" class="button-next">Next</button></div></div></div>'
         );
 
-        $("button.fa-regular.fa-xmark").click(function() {
+        $("button.fa-regular.fa-xmark").click(function () {
 
             $(".container").remove();
 
@@ -82,7 +82,7 @@ $(document).ready(function() {
             $("button.button-next").css("pointer-events", "all");
         }
 
-        $("input[name='withdraw-amount']").keyup(function(event) {
+        $("input[name='withdraw-amount']").keyup(function (event) {
 
             coinpay_fee = fee_calc(coinpay_fee_percentage, $("input[name='withdraw-amount']").val());
             $(".coinpay-fee > .fee-amount").text(coinpay_fee.toFixed(8) + ' USDT');
@@ -143,7 +143,7 @@ $(document).ready(function() {
 
         });
 
-        $("input[name='withdraw-address']").keyup(function() {
+        $("input[name='withdraw-address']").keyup(function () {
 
             var valid = WAValidator.validate($("input[name='withdraw-address']").val(), 'ethereum');
 
@@ -173,7 +173,7 @@ $(document).ready(function() {
 
         });
 
-        $("button.button-next").click(function() {
+        $("button.button-next").click(function () {
 
             if ($("input[name='withdraw-amount']").val() == "" || $("input[name='withdraw-amount']").val() == 0) {
                 $("button.button-next").css("opacity", "0.5");
@@ -216,11 +216,11 @@ $(document).ready(function() {
                 '<div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="summary-title"><p class="summary-text">You are about the withdraw: </p></div><div class="withdraw-summary"><div class="summary"><div class="summary-amount">' + total_fee.toFixed(8) + ' USDT</div><div class="summary-price">' + $.number(usdt_current * total_fee, 2) + ' USD</div></div></div><div class="summary-addresses"><div class="from-address"><p class="from-text">From</p><p class="from-address">Coinpay tether account</p></div><div class="to-address"><p class="to-text">To</p><p class="to-address">' + $("input[name='withdraw-address']").val() + '</p></div></div><div class="fees"><div class="coinpay-fee"><p class="fee-text"> CoinPAY Fee</p><p class="fee-amount" data-fee-amount="' + coinpay_fee.toFixed(8) + '">' + coinpay_fee.toFixed(8) + ' USDT</p></div><div class="network-fee"><p class="fee-text"> Network Fee</p><p class="fee-amount" data-fee-amount="' + eth_network_fee + '">' + eth_network_fee + ' ETH</p></div><div class="total"><p class="fee-text">Total</p><p class="fee-amount" data-fee-amount="' + total_fee.toFixed(8) + '">' + total_fee.toFixed(8) + ' <b>USDT</b> + ' + $(".network-fee > .fee-amount").attr("data-fee-amount") + ' <b>ETH</b>' + '</p></div></div><div class="button-confirm-withdrawal"><button type="submit" name="button" class="button-confirm-withdrawal">Confirm Withdrawal</button></div>'
             );
 
-            $("button.fa-regular.fa-xmark").click(function() {
+            $("button.fa-regular.fa-xmark").click(function () {
                 $(".container").remove();
             });
 
-            $("button.button-confirm-withdrawal").click(function() {
+            $("button.button-confirm-withdrawal").click(function () {
 
                 $.ajax({
                     type: 'POST',
@@ -234,17 +234,17 @@ $(document).ready(function() {
                         address: address,
                         currency: 'usdt'
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response["result"] == "Save successfull") {
                             $(".container > .modal").html(
                                 '<div class="header"><h1>CoinPAY - Withdraw Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="withdraw-success"><div class="success-img"><img width="200" height="200" src="http://' + host_name + '/coinpay-admin/assets/img/success.jpg" alt="Success"></div><div class="succes-text"><div class="text-title">Your transaction is on the way</div><div class="text-content"><p>You sent <span class="success-amount">' + amount + '</span> USDT <span class="success-price">(' + $.number(usdt_current * amount, 2) + ' USD)</span> to <span class="success-address">' + address + '</span> </p></div></div></div><div class="button-back-to-balances"><button type="submit" name="button" class="back-to-balances">Go back to wallet</button></div>'
                             );
 
-                            $("button.fa-regular.fa-xmark").click(function() {
+                            $("button.fa-regular.fa-xmark").click(function () {
                                 location.reload();
                             });
 
-                            $("button.back-to-balances").click(function() {
+                            $("button.back-to-balances").click(function () {
                                 location.reload();
                             });
 
@@ -259,7 +259,7 @@ $(document).ready(function() {
     });
 
     //Tether Deposit Modal
-    $(".wallet-action-input.deposit").click(function() {
+    $(".wallet-action-input.deposit").click(function () {
         var address = "";
 
         $.ajax({
@@ -270,14 +270,14 @@ $(document).ready(function() {
             },
             url: "http://" + host_name + "/coinpay-admin/src/backend/withdraw-address-create.php",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 address = response["result"];
             }
         });
 
         $("body").append('<div class="container"><div class="modal"><div class="header"><h1>CoinPAY - Deposit Tether</h1><button type="button" class="fa-regular fa-xmark"></button><div class="clear"></div></div><div class="main"><div class="img-qr"><img class="qr" width="300" height="300" src="https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=' + address + '" alt=""></div><div class="text"><label id="label" for="">Address</label><div class="aaddress">' + address + ' <i class="fa-regular fa-clipboard"></i></div></div></div></div></div>');
 
-        $("button.fa-regular.fa-xmark").click(function() {
+        $("button.fa-regular.fa-xmark").click(function () {
 
             $(".container").remove();
 

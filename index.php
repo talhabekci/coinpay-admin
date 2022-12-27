@@ -85,6 +85,14 @@ if ($route[0] == "") {
     $n = mysqli_num_rows($result);
 
     if ($n > 0) {
+
+        if (isset($route[1])) {
+            if ($route[1] == "payment-buttons") {
+                include 'src/page/payment-tools/payment-buttons.php';
+                exit;
+            }
+        }
+
         include 'src/page/payment-tools/payment-tools.php';
     } else {
         header("Location: http://" . $host_name["ip_address"] . "/coinpay-admin/login/");

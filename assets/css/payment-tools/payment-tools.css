@@ -40,6 +40,15 @@
     width: 570px;
 }
 
+#payment-buttons:hover {
+    border: 1px solid;
+}
+
+a {
+    text-decoration: none;
+    color: #616471;
+}
+
 .page .payment-tools .payment-tools-card:first-child {
     margin-top: 4rem;
 }
@@ -62,6 +71,7 @@
 .page .payment-tools .payment-tools-cards .payment-tools-card .card-title {
     margin-bottom: 0.5rem;
     text-align: left;
+
 }
 
 .page .payment-tools .payment-tools-cards .payment-tools-card .card-content {

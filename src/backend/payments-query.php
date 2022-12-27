@@ -2,7 +2,7 @@
 session_start();
 require 'config.php';
 
-$result = mysqli_query($open, "SELECT `order_id` FROM `cp_transactions` WHERE `user_id` = '".$_SESSION["user_id"]."' AND (`status` = '1' OR `status` = '2') AND `is_wallet` = 'no' ");
+$result = mysqli_query($open, "SELECT `order_id` FROM `cp_transactions` WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND (`status` = '1' OR `status` = '2') AND `is_wallet` = 'no' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error occurred while selecting data from database " . mysqli_error($open)]]));
 }
@@ -15,7 +15,7 @@ $array = [];
 
 foreach ($result as $order_id) {
 
-    $result = mysqli_query($open, 'SELECT DAY(`date`) as `day`, MONTHNAME(`date`) as `monthname`, DATE_FORMAT(`date`,"%H:%i") as `date_formated`, `order_id`, `net_price`, `status` FROM `cp_orders` WHERE `date` BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW() AND `order_id` = "'.$order_id['order_id'].'" AND (`status` = "1" OR `status` = "2") ORDER BY `date` DESC');
+    $result = mysqli_query($open, 'SELECT DAY(`date`) as `day`, MONTHNAME(`date`) as `monthname`, DATE_FORMAT(`date`,"%H:%i") as `date_formated`, `order_id`, `net_price`, `status` FROM `cp_orders` WHERE `order_id` = "' . $order_id['order_id'] . '" AND (`status` = "1" OR `status` = "2") ORDER BY `date` DESC');
     if ($result == FALSE) {
         exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error occurred while selecting data from database " . mysqli_error($open)]]));
     }
@@ -35,9 +35,6 @@ foreach ($result as $order_id) {
         "Total-Price" => $order_details["net_price"],
         "Status" => $status
     ];
-
 }
 
 echo json_encode($array);
-
-?>

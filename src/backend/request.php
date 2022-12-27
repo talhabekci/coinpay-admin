@@ -1,6 +1,7 @@
 <?php
 
-function request($method, $params) {
+function request($method, $params)
+{
     if (!$init = curl_init()) {
         return ["result" => null, "error" => ["code" => null, "message" => "Initalize a cURL session"]];
     }
@@ -10,7 +11,7 @@ function request($method, $params) {
         CURLOPT_URL => "localhost",
         CURLOPT_PORT => 18332,
         CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-        CURLOPT_USERPWD => "__cookie__:e119a0d884843475260edb2d303eda8b07915cb2b5135e081880575ee6905b7f",
+        CURLOPT_USERPWD => "__cookie__:9e8746174be8761d4d7943ae8f1267e9fcf5531773a013ad4072b90647db62b8",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
         CURLOPT_POST => true,
@@ -29,7 +30,8 @@ function request($method, $params) {
     return json_decode($exec, true);
 }
 
-function eth_request($method, $params, $id) {
+function eth_request($method, $params, $id)
+{
     if (!$init = curl_init()) {
         return ["result" => null, "error" => ["code" => null, "message" => "Initalize a cURL session"]];
     }

@@ -1,12 +1,13 @@
 <?php
 session_start();
-error_reporting(E_ALL ^ E_DEPRECATED);//bchexdec fonkisyonundaki deprecated uyarısını almamak için koydum.
+error_reporting(E_ALL ^ E_DEPRECATED); //bchexdec fonkisyonundaki deprecated uyarısını almamak için koydum.
 
 require '../config.php';
 require '../request.php';
 
-function bchexdec($hex) {
-    if(strlen($hex) == 1) {
+function bchexdec($hex)
+{
+    if (strlen($hex) == 1) {
         return hexdec($hex);
     } else {
         $remain = substr($hex, 0, -1);
@@ -15,14 +16,15 @@ function bchexdec($hex) {
     }
 }
 
-function bcdechex($dec) {
+function bcdechex($dec)
+{
     $last = bcmod($dec, 16);
     $remain = bcdiv(bcsub($dec, $last), 16);
 
-    if($remain == 0) {
+    if ($remain == 0) {
         return dechex($last);
     } else {
-        return bcdechex($remain).dechex($last);
+        return bcdechex($remain) . dechex($last);
     }
 }
 
@@ -37,13 +39,16 @@ $id = [];
 
 while ($btc_withdraws =  mysqli_fetch_array($result)) {
 
-    if (isset($output[$btc_withdraws["address"]]) == FALSE ) {
+    if (isset($output[$btc_withdraws["address"]]) == FALSE) {
         $output[] = [$btc_withdraws["address"] => $btc_withdraws["amount"]];
         $id[] = $btc_withdraws["id"];
     }
 }
 echo json_encode($output);
 echo "<hr>";
+
+echo $id;
+exit;
 
 $createrawtransaction = request("createrawtransaction", [[], $output]);
 echo "Create Raw Transaction = ";
@@ -126,12 +131,12 @@ echo "<pre>";
 echo json_encode($decoderawtransaction["result"]["txid"], JSON_PRETTY_PRINT);
 echo "</pre>";
 
-$result = mysqli_query($open, "INSERT INTO `cp_transactions` (`user_id`, `type`, `txid`, `order_id`, `currency`, `confirmation`, `status`, `is_wallet`) VALUES ('".$_SESSION["user_id"]."', '1', '".$decoderawtransaction["result"]["txid"]."', NULL, 'btc', '0', '0', 'yes')");
+$result = mysqli_query($open, "INSERT INTO `cp_transactions` (`user_id`, `type`, `txid`, `order_id`, `currency`, `confirmation`, `status`, `is_wallet`) VALUES ('" . $_SESSION["user_id"] . "', '1', '" . $decoderawtransaction["result"]["txid"] . "', NULL, 'btc', '0', '0', 'yes')");
 if ($result === false) {
-   exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while inserting data on database " . mysqli_error($open)]]));
+    exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while inserting data on database " . mysqli_error($open)]]));
 }
 
-$result = mysqli_query($open, "UPDATE `cp_withdraws` SET `status` = '2' WHERE `id` = '".$id."' ");
+$result = mysqli_query($open, "UPDATE `cp_withdraws` SET `status` = '2' WHERE `id` = '" . $id . "' ");
 if ($result == FALSE) {
     exit(json_encode(["result" => NULL, "error" => ["code" => NULL, "message" => "An error ocurred while updating data " . mysqli_error($open)]]));
 }
@@ -210,5 +215,3 @@ if ($result == FALSE) {
 // while ($usdt_withdraws =  mysqli_fetch_array($result)) {
 
 // }
-
-?>

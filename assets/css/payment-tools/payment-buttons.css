@@ -1,0 +1,46 @@
+.payment-tools {
+
+    margin-top: 100px !important;
+}
+
+.checkout-button {
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid;
+}
+
+.input-div {
+    display: flex;
+    border: 1px solid;
+    flex-direction: column;
+}
+
+.input-div h3 {
+    margin-bottom: 15px;
+}
+
+label {
+    text-align: left;
+    padding: 10px;
+}
+
+.inp-default-price {
+    text-align: left;
+    padding: 10px;
+}
+
+.inp-default-price input {
+    height: 40px;
+    width: 400px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #0001;
+}
+
+.text1 {
+    border: 1px solid;
+}

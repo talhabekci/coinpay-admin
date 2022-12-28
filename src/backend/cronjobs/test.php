@@ -1,9 +1,10 @@
 <?php
-error_reporting(E_ALL ^ E_DEPRECATED);//bchexdec fonkisyonundaki deprecated uyarısını almamak için koydum.
+error_reporting(E_ALL ^ E_DEPRECATED); //bchexdec fonkisyonundaki deprecated uyarısını almamak için koydum.
 require '../request.php';
 
-function bchexdec($hex) {
-    if(strlen($hex) == 1) {
+function bchexdec($hex)
+{
+    if (strlen($hex) == 1) {
         return hexdec($hex);
     } else {
         $remain = substr($hex, 0, -1);
@@ -12,14 +13,15 @@ function bchexdec($hex) {
     }
 }
 
-function bcdechex($dec) {
+function bcdechex($dec)
+{
     $last = bcmod($dec, 16);
     $remain = bcdiv(bcsub($dec, $last), 16);
 
-    if($remain == 0) {
+    if ($remain == 0) {
         return dechex($last);
     } else {
-        return bcdechex($remain).dechex($last);
+        return bcdechex($remain) . dechex($last);
     }
 }
 
@@ -70,4 +72,5 @@ echo "<pre>";
 echo json_encode($sendRawTransaction, JSON_PRETTY_PRINT);
 echo "</pre>";
 echo "<hr>";
-?>
+
+//"0xa9059cbb" . str_pad(substr($address["address"], 2), 64, "0", STR_PAD_LEFT) . str_pad(bcdechex(bcmul(bcsub($transfer["amount"], $transfer["fee"], 18), "1000000000000000000")), 64, "0", STR_PAD_LEFT)

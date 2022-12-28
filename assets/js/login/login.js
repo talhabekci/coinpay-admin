@@ -1,4 +1,4 @@
-$("document").ready(function() {
+$("document").ready(function () {
 
     var host_name = "";
 
@@ -10,7 +10,7 @@ $("document").ready(function() {
             data: "host_name"
         },
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             host_name = response["ip_address"]
         }
     });
@@ -25,7 +25,7 @@ $("document").ready(function() {
         }
     }
 
-    $(".fa-eye-slash").click(function() {
+    $(".fa-eye-slash").click(function () {
         if ($("input[name='password']").attr("type") == "password") {
             $("input[name='password']").attr("type", "text");
             $(".fa-eye-slash").attr("class", "fas fa-eye");
@@ -35,7 +35,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".input.email").keyup(function() {
+    $(".input.email").keyup(function () {
 
         if (IsEmailValid($(".input.email").val()) == false) {
             $(".error-message.email").css("display", "block");
@@ -61,7 +61,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".input.password").keyup(function() {
+    $(".input.password").keyup(function () {
         if (!$(".input.password").val() == "") {
             $(".error-message.password").css("display", "none");
             $(".input.password").css("background-color", "");
@@ -74,7 +74,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".submit-login").click(function(e) {
+    $(".submit-login").click(function (e) {
 
         if ($(".error-message.login").css("display") == "flex") {
             $(".error-message.login").css("display", "none");
@@ -111,7 +111,7 @@ $("document").ready(function() {
                 submit: $(".submit-login").attr("name")
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 console.log(response);
                 if (response["error"]) {
                     $(".error-message.login").css("display", "flex");

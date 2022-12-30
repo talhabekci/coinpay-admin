@@ -112,7 +112,6 @@ $("document").ready(function () {
             },
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 if (response["error"]) {
                     $(".error-message.login").css("display", "flex");
                     $(".error-message.login > .error-message-text").text(response["error"]);

@@ -112,6 +112,8 @@ if ($route[0] == "") {
     }
 } elseif ($route[0] == "signup") {
     include 'src/page/signup/signup.php';
+} elseif ($route[0] == "verify-email") {
+    include 'src/page/verify-email/verify-email.php';
 } elseif ($route[0] == "login") {
     include 'src/page/login/login.php';
 } elseif ($route[0] == "logout") {

@@ -1,4 +1,4 @@
-$("document").ready(function() {
+$("document").ready(function () {
 
     var host_name = "";
 
@@ -10,7 +10,7 @@ $("document").ready(function() {
             data: "host_name"
         },
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
             host_name = response["ip_address"]
         }
     });
@@ -25,7 +25,7 @@ $("document").ready(function() {
         }
     }
 
-    $(".fa-eye-slash").click(function() {
+    $(".fa-eye-slash").click(function () {
 
         if ($("input[name='password']").attr("type") == "password") {
             $("input[name='password']").attr("type", "text");
@@ -37,7 +37,7 @@ $("document").ready(function() {
 
     });
 
-    $(".input.fname").keyup(function() {
+    $(".input.fname").keyup(function () {
         if (!$(".input.fname").val() == "") {
             $(".error-message.fname").css("display", "none");
             $(".input.fname").css("background-color", "");
@@ -50,7 +50,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".input.lname").keyup(function() {
+    $(".input.lname").keyup(function () {
         if (!$(".input.lname").val() == "") {
             $(".error-message.lname").css("display", "none");
             $(".input.lname").css("background-color", "");
@@ -63,7 +63,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".input.email").keyup(function() {
+    $(".input.email").keyup(function () {
 
         if (IsEmailValid($(".input.email").val()) == false) {
             $(".error-message.email").css("display", "block");
@@ -89,7 +89,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".input.password").keyup(function() {
+    $(".input.password").keyup(function () {
         if ($(".input.password").val() == "" || $(".input.password").val().length < 8) {
             $(".error-message.password").css("display", "block");
             $(".input.password").css("background-color", "#FAEAED");
@@ -102,7 +102,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".input.terms").click(function() {
+    $(".input.terms").click(function () {
         if ($(".input.terms").prop("checked") == true) {
             $(".error-message.terms-privacy").css("display", "none");
         } else {
@@ -110,7 +110,7 @@ $("document").ready(function() {
         }
     });
 
-    $(".submit-signup").click(function(e) {
+    $(".submit-signup").click(function (e) {
 
         if ($(".error-message.signup").css("display") == "flex") {
             $(".error-message.signup").css("display", "none");
@@ -168,12 +168,11 @@ $("document").ready(function() {
                 submit: $(".submit-signup").attr("name")
             },
             dataType: 'json',
-            success: function(response) {
-                console.log(response);
+            success: function (response) {
                 if (response["error"]) {
                     $(".error-message.signup").css("display", "flex");
                     $(".error-message.signup > .error-message-text").text(response["error"]);
-                } else if (response["result"] == "Register Successfull") {
+                } else if (response["result"]) {
                     $(".success-message.signup").css("display", "flex");
                     $(".success-message.signup > .success-message-text").text(response["result"]);
                     $(".signup-form").trigger("reset");

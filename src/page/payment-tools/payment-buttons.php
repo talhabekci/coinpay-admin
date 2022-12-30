@@ -45,10 +45,15 @@ if ($n <= 0) {
                     <div class="inp-default-price">
                         <input type="text" value="1" id="default-price">
                     </div>
+                    <label id="description-label" for="">Checkout Description</label>
+                    <div class="inp-checkout-description">
+                        <input type="text" value="" placeholder="(optional)" id="checkout-description">
+                    </div>
                 </div>
 
                 <div class="text1">
-                    a
+                    <p id="p1">This button is used to complete a sale on your website.</p>
+                    <p id="p2">The merchant manages the shopping cart and collects the buyers' names and addresses if necessary.</p>
                 </div>
             </div>
         </div>

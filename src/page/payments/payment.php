@@ -24,6 +24,7 @@ $paid = 0;
 if ($transaction_details["currency"] == "btc") {
 
     $gettransaction = request("gettransaction", [$transaction_details["txid"]]);
+
     foreach ($gettransaction["result"]["details"] as $details) {
         if ($details["address"] == $order_details["address"]) {
             $paid = $details["amount"];

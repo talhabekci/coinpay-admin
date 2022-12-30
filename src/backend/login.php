@@ -20,6 +20,23 @@ function getIP()
 if (!empty($_POST["submit"] && $_POST["email"] && $_POST["password"])) {
 
     $ip_address = getIP();
+    $email = mysqli_real_escape_string($open, $_POST["email"]);
+    $password = mysqli_real_escape_string($open, $_POST["password"]);
+
+    $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '" . $email . "' ");
+    if ($result == false) {
+        exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while selecting data " . mysqli_error($open)]]));
+    }
+
+    if (mysqli_num_rows($result) == 0) {
+        exit(json_encode(["result" => null, "error" => "There is no account with this email address"]));
+    }
+
+    $user_credentials = mysqli_fetch_array($result);
+
+    if ($user_credentials["status"] != 2) {
+        exit(json_encode(["result" => null, "error" => "Please verify your email address first."]));
+    }
 
     $time = time() - 90; //90 seconds.
     $result = mysqli_query($open, "SELECT COUNT(*) as `total_attempts` FROM `attempts_count` WHERE `time_count` > '" . $time . "' AND `ip_address` = '" . $ip_address . "' ");
@@ -32,22 +49,6 @@ if (!empty($_POST["submit"] && $_POST["email"] && $_POST["password"])) {
     if ($total_attempts["total_attempts"] > 2) {
         exit(json_encode(["result" => null, "error" => "Too many wrong attempts please wait 90 seconds."]));
     }
-
-    $email = mysqli_real_escape_string($open, $_POST["email"]);
-    $password = mysqli_real_escape_string($open, $_POST["password"]);
-
-    $result = mysqli_query($open, "SELECT * FROM `cp_users` WHERE `email` = '" . $email . "' ");
-    if ($result == false) {
-        exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while selecting data " . mysqli_error($open)]]));
-    }
-
-    $n = mysqli_num_rows($result);
-
-    if ($n <= 0) {
-        exit(json_encode(["result" => null, "error" => "Could not log in. Please review your information and try again."]));
-    }
-
-    $user_credentials = mysqli_fetch_array($result);
 
     if (!password_verify($password, $user_credentials["password"])) {
         $time_count = time();

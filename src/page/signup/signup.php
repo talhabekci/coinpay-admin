@@ -6,20 +6,20 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" type="image/x-icon" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/cp-favicon.png">
-    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/css/signup/signup.css">
-    <link rel="stylesheet" href="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/fontawesome.com/css/all.css">
+    <link rel="icon" type="image/x-icon" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/img/cp-favicon.png">
+    <link rel="stylesheet" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/css/signup/signup.css">
+    <link rel="stylesheet" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/fontawesome.com/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/js/signup/signup.js"></script>
+    <script src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/js/signup/signup.js"></script>
     <title>Signup</title>
 </head>
 
 <body>
     <div class="container">
-        <img src="http://<?=$host_name["ip_address"]?>/coinpay-admin/assets/img/coinpay-svg.svg" width="80" height="80" alt="Logo" class="coinpay-logo">
+        <img src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/img/coinpay-svg.svg" width="80" height="80" alt="Logo" class="coinpay-logo">
         <div class="modal">
             <div class="header">
                 <div class="header-title">Welcome to CoinPay</div>
@@ -72,7 +72,7 @@
                 </form>
             </div>
         </div>
-        <div class="login-link">Already have an account? <a href="http://<?=$host_name["ip_address"]?>/coinpay-admin/login/">Login</a> </div>
+        <div class="login-link">Already have an account? <a href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/login/">Login</a> </div>
     </div>
 </body>
 

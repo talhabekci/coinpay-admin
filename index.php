@@ -116,6 +116,10 @@ if ($route[0] == "") {
     include 'src/page/verify-email/verify-email.php';
 } elseif ($route[0] == "login") {
     include 'src/page/login/login.php';
+} elseif ($route[0] == "forgot-password") {
+    include 'src/page/forgot-password/forgot-password.php';
+} elseif ($route[0] == "reset-password") {
+    include 'src/page/reset-password/reset-password.php';
 } elseif ($route[0] == "logout") {
     include 'src/backend/logout.php';
 } else {

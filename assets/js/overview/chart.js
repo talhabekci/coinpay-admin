@@ -8,7 +8,7 @@ $.ajax({
         data: "host_name"
     },
     dataType: "json",
-    success: function(response) {
+    success: function (response) {
         host_name = response["ip_address"]
     }
 });
@@ -19,7 +19,7 @@ $.ajax({
     url: 'http://' + host_name + '/coinpay-admin/src/backend/chart-query.php',
     dataType: 'json',
     async: false,
-    success: function(response) {
+    success: function (response) {
 
         var labels = [];
         var datax = [];

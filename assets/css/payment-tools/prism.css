@@ -1,0 +1,93 @@
+/* PrismJS 1.29.0
+https://prismjs.com/download.html#themes=prism-dark&languages=markup */
+code[class*=language-],
+pre[class*=language-] {
+    color: #fff;
+    background: 0 0;
+}
+
+@media print {
+
+    code[class*=language-],
+    pre[class*=language-] {
+        text-shadow: none
+    }
+}
+
+:not(pre)>code[class*=language-],
+pre[class*=language-] {
+    background: #000000
+}
+
+pre[class*=language-] {
+    overflow: auto;
+    border-radius: 5px;
+}
+
+:not(pre)>code[class*=language-] {}
+
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+    color: rgb(0, 0, 0)
+}
+
+.token.punctuation {}
+
+.token.namespace {}
+
+.token.boolean,
+.token.constant,
+.token.number,
+.token.property,
+.token.symbol,
+.token.tag {
+    color: #f92672;
+}
+
+.token.attr-name,
+.token.builtin,
+.token.char,
+.token.inserted,
+.token.selector,
+.token.string {
+    color: #bce051
+}
+
+.language-css .token.string,
+.style .token.string,
+.token.entity,
+.token.operator,
+.token.url,
+.token.variable {
+    color: #f4b73d
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #e6db74
+}
+
+.token.important,
+.token.regex {
+    color: #e90
+}
+
+.token.bold,
+.token.important {
+    font-weight: 700;
+}
+
+.token.italic {
+    font-style: italic
+}
+
+.token.entity {
+    cursor: help
+}
+
+.token.deleted {
+    color: red
+}

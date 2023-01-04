@@ -20,6 +20,7 @@ if ($n <= 0) {
     <link rel="icon" type="image/x-icon" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/img/cp-favicon.png">
     <link rel="stylesheet" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/css/sidebar/style.css">
     <link rel="stylesheet" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/css/payment-tools/payment-tools.css">
+    <link rel="stylesheet" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/css/payment-tools/prism.css">
     <link rel="stylesheet" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/css/payment-tools/payment-buttons.css">
     <link rel="stylesheet" href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/fontawesome.com/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +31,7 @@ if ($n <= 0) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/js/sidebar/index.js"></script>
     <script src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/js/payment-tools/payment-tools.js"></script>
+    <script src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/js/payment-tools/prism.js"></script>
     <title>CoinPay Payment Tools</title>
 </head>
 
@@ -45,15 +47,32 @@ if ($n <= 0) {
                     <div class="inp-default-price">
                         <input type="text" value="1" id="default-price">
                     </div>
-                    <label id="description-label" for="">Checkout Description</label>
-                    <div class="inp-checkout-description">
-                        <input type="text" value="" placeholder="(optional)" id="checkout-description">
+                    <label id="order-id-label" for="">Order Id</label>
+                    <div class="inp-order-id">
+                        <input type="text" value="" placeholder="e.g. 102" id="order-id">
                     </div>
                 </div>
 
                 <div class="text1">
                     <p id="p1">This button is used to complete a sale on your website.</p>
                     <p id="p2">The merchant manages the shopping cart and collects the buyers' names and addresses if necessary.</p>
+                </div>
+            </div>
+            <div class="code">
+                <div class="generated-code">
+                    <h3>Generated Code</h3>
+                    <p>Select all of the HTML code below, then copy and paste it into your web page.</p>
+                    <div class="in-code">
+                        <pre>
+                            <code class="language-markup">
+                                 &lt;p class="red">red text&lt;/p>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+
+                <div class="code-button">
+                    b
                 </div>
             </div>
         </div>

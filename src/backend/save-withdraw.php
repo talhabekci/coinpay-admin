@@ -8,17 +8,17 @@ if (!isset($_POST["withdraw_id"], $_POST["net_amount"], $_POST["address"], $_POS
 
 require 'config.php';
 
-$withdraw_id = $_POST["withdraw_id"];
-$net_amount = $_POST["net_amount"];
-$address = $_POST["address"];
-$currency = $_POST["currency"];
+$withdraw_id = mysqli_real_escape_string($open, $_POST["withdraw_id"]);
+$net_amount = mysqli_real_escape_string($open, $_POST["net_amount"]);
+$address = mysqli_real_escape_string($open, $_POST["address"]);
+$currency = mysqli_real_escape_string($open, $_POST["currency"]);
 $btc_balance = $_SESSION["btc_balance"];
 $eth_balance = $_SESSION["eth_balance"];
 $usdt_balance = $_SESSION["usdt_balance"];
 
 if ($currency == "btc") {
 
-    $fee = $_POST["fee"];
+    $fee = mysqli_real_escape_string($open, $_POST["fee"]);
 
     if ($net_amount > $btc_balance) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
@@ -26,19 +26,19 @@ if ($currency == "btc") {
 
     $amount = $net_amount - $fee;
 
-    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
+    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('" . $withdraw_id . "', '" . $_SESSION["user_id"] . "', '" . $address . "', '" . $amount . "', '" . $fee . "', '" . $net_amount . "', '" . $currency . "', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
 
     $new_balance = $btc_balance - $net_amount;
 
-    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '" . $new_balance . "' WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'btc' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while updating data " . mysqli_error($open)]]));
     }
 
-    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'btc' ");
+    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'btc' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while updating data " . mysqli_error($open)]]));
     }
@@ -50,7 +50,7 @@ if ($currency == "btc") {
     exit(json_encode(["result" => "Save successfull", "error" => null]));
 } elseif ($currency == "eth") {
 
-    $fee = $_POST["fee"];
+    $fee = mysqli_real_escape_string($open, $_POST["fee"]);
 
     if ($net_amount > $eth_balance) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
@@ -58,19 +58,19 @@ if ($currency == "btc") {
 
     $amount = $net_amount - $fee;
 
-    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$fee."', '".$net_amount."', '".$currency."', 0) ");
+    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('" . $withdraw_id . "', '" . $_SESSION["user_id"] . "', '" . $address . "', '" . $amount . "', '" . $fee . "', '" . $net_amount . "', '" . $currency . "', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
 
     $new_balance = $eth_balance - $net_amount;
 
-    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '" . $new_balance . "' WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'eth' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while updating data " . mysqli_error($open)]]));
     }
 
-    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'eth' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while updating data " . mysqli_error($open)]]));
     }
@@ -82,8 +82,8 @@ if ($currency == "btc") {
     exit(json_encode(["result" => "Save successfull", "error" => null]));
 } elseif ($currency == "usdt") {
 
-    $eth_fee = $_POST["eth_fee"];
-    $coinpay_fee = $_POST["coinpay_fee"];
+    $eth_fee = mysqli_real_escape_string($open, $_POST["eth_fee"]);
+    $coinpay_fee = mysqli_real_escape_string($open, $_POST["coinpay_fee"]);
 
     if ($net_amount > $usdt_balance) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "Insufficent Balance"]]));
@@ -91,26 +91,26 @@ if ($currency == "btc") {
 
     $amount = $net_amount - $coinpay_fee;
 
-    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('".$withdraw_id."', '".$_SESSION["user_id"]."', '".$address."', '".$amount."', '".$coinpay_fee."', '".$net_amount."', '".$currency."', 0) ");
+    $result = mysqli_query($open, "INSERT INTO `cp_withdraws` (`withdraw_id`, `user_id`, `address`, `amount`, `fee`, `net_amount`, `currency`, `status`) VALUES ('" . $withdraw_id . "', '" . $_SESSION["user_id"] . "', '" . $address . "', '" . $amount . "', '" . $coinpay_fee . "', '" . $net_amount . "', '" . $currency . "', 0) ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error ocurred while inserting data to database " . mysqli_error($open)]]));
     }
 
     $new_balance = $usdt_balance - $net_amount;
 
-    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt' ");
+    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '" . $new_balance . "' WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'usdt' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while updating data " . mysqli_error($open)]]));
     }
 
     $new_eth_balance = $eth_balance - $eth_fee;
 
-    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '".$new_eth_balance."' WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+    $result = mysqli_query($open, "UPDATE `cp_balances` SET `amount` = '" . $new_eth_balance . "' WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'eth' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while updating data " . mysqli_error($open)]]));
     }
 
-    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'usdt' ");
+    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'usdt' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while selecting data " . mysqli_error($open)]]));
     }
@@ -119,7 +119,7 @@ if ($currency == "btc") {
 
     $_SESSION["usdt_balance"] = $new_usdt_balance["amount"];
 
-    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '".$_SESSION["user_id"]."' AND `currency` = 'eth' ");
+    $result = mysqli_query($open, "SELECT * FROM `cp_balances` WHERE `user_id` = '" . $_SESSION["user_id"] . "' AND `currency` = 'eth' ");
     if ($result == false) {
         exit(json_encode(["result" => null, "error" => ["code" => null, "message" => "An error occurred while selecting data " . mysqli_error($open)]]));
     }

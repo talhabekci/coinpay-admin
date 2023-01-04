@@ -4,7 +4,7 @@ $("document").ready(function () {
 
     $.ajax({
         method: "POST",
-        url: "../src/backend/host-name.php",
+        url: "src/backend/host-name.php",
         async: false,
         data: {
             data: "host_name"

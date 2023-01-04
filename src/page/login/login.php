@@ -59,7 +59,7 @@ if ($n >= 1) {
             </div>
         </div>
         <div class="reset-password">
-            <a href="#">Forgot your password?</a>
+            <a href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/forgot-password">Forgot your password?</a>
         </div>
         <div class="signup-link">Don't have an account? <a href="http://<?= $host_name["ip_address"] ?>/coinpay-admin/signup/">Signup</a> </div>
     </div>

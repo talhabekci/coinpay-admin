@@ -37,9 +37,9 @@ function eth_request($method, $params, $id)
     }
 
     $options = [
-        CURLOPT_PROTOCOLS => CURLPROTO_HTTP,
-        CURLOPT_URL => "192.168.1.90",
-        CURLOPT_PORT => 8545,
+        CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
+        CURLOPT_URL => "https://goerli.infura.io/v3/4b8eb8eda4d146519519cf568db26ea2",
+        //CURLOPT_PORT => 8545,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],
         CURLOPT_POST => true,

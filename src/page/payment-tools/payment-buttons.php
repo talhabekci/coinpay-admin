@@ -63,9 +63,12 @@ if ($n <= 0) {
                     <h3>Generated Code</h3>
                     <p>Select all of the HTML code below, then copy and paste it into your web page.</p>
                     <div class="in-code">
-                        <pre>
-                            <code class="language-markup">
-                                 &lt;p class="red">red text&lt;/p>
+                        <pre class="language-html">
+                            <code class="language-html">
+                                &lt;form action="http://<?= $host_name["ip_address"] ?>/coinpay/select-currency/" method="post">
+                                &lt;input type="hidden" name="data" value="">
+                                &lt;input type="image" src="http://<?= $host_name["ip_address"] ?>/coinpay/assets/img/coinpay-logo.png" name="submit" style="width: 180px; height: 50px;" alt="CoinPay, the easy way to pay with bitcoins.">
+                                &lt;/form>
                             </code>
                         </pre>
                     </div>

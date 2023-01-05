@@ -39,23 +39,24 @@ if ($result == false) {
 
 $mail = new PHPMailer(true);
 
-$mail->SMTPDebug = SMTP::DEBUG_OFF;
-$mail->isSMTP();
-$mail->Host       = 'smtp.gmail.com';
-$mail->SMTPAuth   = true;
-$mail->Username   = 'iibtahim.bbekci@gmail.com';
-$mail->Password   = 'ijdpaentlbymmmvo';
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-$mail->Port       = 465;
+try {
+    $mail->SMTPDebug = SMTP::DEBUG_OFF;
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'iibtahim.bbekci@gmail.com';
+    $mail->Password   = 'ijdpaentlbymmmvo';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port       = 465;
 
 
-$mail->setFrom('iibtahim.bbekci@gmail.com', 'CoinPay');
-$mail->addAddress($email);
+    $mail->setFrom('iibtahim.bbekci@gmail.com', 'CoinPay');
+    $mail->addAddress($email);
 
 
-$mail->isHTML(true);
-$mail->Subject = 'Reset Your Password';
-$mail->Body    = '
+    $mail->isHTML(true);
+    $mail->Subject = 'Reset Your Password';
+    $mail->Body    = '
         <!DOCTYPE html>
         <html lang="en">
         
@@ -169,6 +170,10 @@ $mail->Body    = '
         </html>
         ';
 
-$mail->send();
+    $mail->send();
 
-exit(json_encode(["result" => "Password reset link has been sent to your email address.", "error" => null]));
+    exit(json_encode(["result" => "Password reset link has been sent to your email address.", "error" => null]));
+} catch (Exception $e) {
+
+    exit(json_encode(["result" => NULL, "error" => "Password reset email send failed. " . $mail->ErrorInfo]));
+}

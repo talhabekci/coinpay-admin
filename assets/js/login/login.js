@@ -4,7 +4,7 @@ $("document").ready(function () {
 
     $.ajax({
         method: "POST",
-        url: "src/backend/host-name.php",
+        url: "../src/backend/host-name.php",
         async: false,
         data: {
             data: "host_name"
@@ -61,18 +61,19 @@ $("document").ready(function () {
         }
     });
 
-    $(".input.password").keyup(function () {
-        if (!$(".input.password").val() == "") {
-            $(".error-message.password").css("display", "none");
-            $(".input.password").css("background-color", "");
-            $(".input.password").css("border", "");
-        } else {
-            $(".error-message.password").css("display", "block");
-            $(".input.password").css("background-color", "#FAEAED");
-            $(".input.password").css("border", "1px solid #E9A2AE");
-            return false;
-        }
-    });
+    //Password required error for keyup event.
+    // $(".input.password").keyup(function () {
+    //     if (!$(".input.password").val() == "") {
+    //         $(".error-message.password").css("display", "none");
+    //         $(".input.password").css("background-color", "");
+    //         $(".input.password").css("border", "");
+    //     } else {
+    //         $(".error-message.password").css("display", "block");
+    //         $(".input.password").css("background-color", "#FAEAED");
+    //         $(".input.password").css("border", "1px solid #E9A2AE");
+    //         return false;
+    //     }
+    // });
 
     $(".submit-login").click(function (e) {
 

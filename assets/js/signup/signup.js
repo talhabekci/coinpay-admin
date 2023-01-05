@@ -169,12 +169,12 @@ $("document").ready(function () {
             },
             dataType: 'json',
             success: function (response) {
-                if (response["error"]) {
+                if (response.error) {
                     $(".error-message.signup").css("display", "flex");
-                    $(".error-message.signup > .error-message-text").text(response["error"]);
-                } else if (response["result"]) {
+                    $(".error-message.signup > .error-message-text").text(response.error.message);
+                } else if (response.result) {
                     $(".success-message.signup").css("display", "flex");
-                    $(".success-message.signup > .success-message-text").text(response["result"]);
+                    $(".success-message.signup > .success-message-text").text(response.result);
                     $(".signup-form").trigger("reset");
                 }
             }

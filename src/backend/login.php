@@ -29,7 +29,7 @@ if (!empty($_POST["submit"] && $_POST["email"] && $_POST["password"])) {
     }
 
     if (mysqli_num_rows($result) == 0) {
-        exit(json_encode(["result" => null, "error" => "There is no account with this email address"]));
+        exit(json_encode(["result" => null, "error" => "Could not log in. Please review your information and try again."]));
     }
 
     $user_credentials = mysqli_fetch_array($result);

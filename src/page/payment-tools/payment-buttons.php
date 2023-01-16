@@ -28,7 +28,8 @@ if ($n <= 0) {
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
     <script src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/js/sidebar/index.js"></script>
     <script src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/js/payment-tools/payment-tools.js"></script>
     <script src="http://<?= $host_name["ip_address"] ?>/coinpay-admin/assets/js/payment-tools/prism.js"></script>
@@ -56,6 +57,7 @@ if ($n <= 0) {
                 <div class="text1">
                     <p id="p1">This button is used to complete a sale on your website.</p>
                     <p id="p2">The merchant manages the shopping cart and collects the buyers' names and addresses if necessary.</p>
+                    <input type="text" id="deneme" value="">
                 </div>
             </div>
             <div class="code">
@@ -65,21 +67,44 @@ if ($n <= 0) {
                     <div class="in-code">
                         <pre class="language-html">
                             <code class="language-html">
-                                &lt;form action="http://<?= $host_name["ip_address"] ?>/coinpay/select-currency/" method="post">
-                                &lt;input type="hidden" name="data" value="">
-                                &lt;input type="image" src="http://<?= $host_name["ip_address"] ?>/coinpay/assets/img/coinpay-logo.png" name="submit" style="width: 180px; height: 50px;" alt="CoinPay, the easy way to pay with bitcoins.">
-                                &lt;/form>
+&lt;form id="form" action="http://<?= $host_name["ip_address"] ?>/coinpay/select-currency/" method="post"&gt;
+  &lt;input type="hidden" name="data" value=""&gt;
+  &lt;input type="image" src="http://<?= $host_name["ip_address"] ?>/coinpay/assets/img/coinpay-logo.png" name="submit" style="width: 180px; height: 50px;" alt="CoinPay, the easy way to pay with bitcoins."&gt;
+&lt;/form&gt;
                             </code>
                         </pre>
                     </div>
+                    <div class="copy" data-clipboard-target=".in-code">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <p>COPY CODE</p>
+                    </div>
+                    <div class="with-js"></div>
                 </div>
 
                 <div class="code-button">
-                    b
+                    <h3 id="preview-text">Preview</h3>
+                    <form id="test-form" action="" method="post">
+                        <input type="hidden" name="data" value="">
+                        <input type="image" src="http://<?= $host_name["ip_address"] ?>/coinpay/assets/img/coinpay-logo.png" name="submit" style="width: 180px; height: 50px;" alt="CoinPay, the easy way to pay with bitcoins.">
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    new ClipboardJS('div.copy');
+    $(".copy").click(function() {
+        $(".with-js").html("COPIED TO CLIPBOARD");
+
+        $(".with-js").css("animation", "opacity 3s infinite");
+
+        setTimeout(function() {
+            $('.with-js').html("");
+            $(".with-js").css("animation", "");
+        }, 2900);
+
+    });
+</script>
 
 </html>

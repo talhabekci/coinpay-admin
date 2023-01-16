@@ -82,17 +82,16 @@ label {
 }
 
 .code {
+    height: 300px;
     margin-top: 50px;
+    margin-bottom: 100px;
     padding: 10px 50px;
-    border: 1px solid;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, .4);
 }
 
-.generated-code {
-    border: 1px solid;
-}
+.generated-code {}
 
 .generated-code h3 {
     text-align: left;
@@ -109,11 +108,63 @@ label {
 
 .in-code {
     width: 846px;
-    height: 153;
-    border: 1px solid;
 }
 
 .code-button {
     border: 1px solid;
+
     /*846,153*/
+}
+
+div.copy {
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 130px;
+    margin-left: 8px;
+    color: #3A3A3A;
+}
+
+div.copy:hover {
+    cursor: pointer;
+}
+
+div.copy i {}
+
+div.copy p {
+    text-align: center;
+    padding: 0px;
+    font-size: 14px;
+}
+
+.with-js {
+    font-size: 14px;
+    width: 230px;
+    margin-left: 110px;
+    margin-top: -38px;
+    padding: 11px;
+    color: green;
+
+
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#preview-text {
+    margin-top: 100px;
+}
+
+#test-form {
+    margin-top: 100px;
+
 }

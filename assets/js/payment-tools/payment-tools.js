@@ -17,8 +17,12 @@ $(document).ready(function () {
 
     $("div.sidebar > ul.nav-list > li > a > i.fa-regular.fa-box-dollar").addClass("active");
 
-    /* $("#default-price").keyup(function (event) {
-        $("code.language-html").html('&lt;form id="form" action="http://' + host_name + '/coinpay/select-currency/" method="post"&gt;&lt;input type="hidden" name="data" value="' + $("#default-price").val() + '"&gt;&lt;input type="image" src="http://' + host_name + ' /coinpay/assets/img/coinpay-logo.png" name="submit" style="width: 180px; height: 50px;" alt="CoinPay, the easy way to pay with bitcoins."&gt;&lt;/form&gt;');
-    }); */
+    $("#default-price").keyup(function (event) {
+        $(".code-button > form#create-order-form > input[name='total-price']").val($(this).val());
+    });
+
+    $("#order-id").keyup(function (event) {
+        $(".code-button > form#create-order-form > input[name='order-id']").val($(this).val());
+    });
 
 });

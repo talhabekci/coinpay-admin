@@ -44,7 +44,7 @@ if ($n <= 0) {
             <div class="checkout-button">
                 <div class="input-div">
                     <h3>Create a Checkout Button</h3>
-                    <label for="">Default Price</label>
+                    <label for="">Total Price</label>
                     <div class="inp-default-price">
                         <input type="text" value="1" id="default-price">
                     </div>
@@ -57,7 +57,6 @@ if ($n <= 0) {
                 <div class="text1">
                     <p id="p1">This button is used to complete a sale on your website.</p>
                     <p id="p2">The merchant manages the shopping cart and collects the buyers' names and addresses if necessary.</p>
-                    <input type="text" id="deneme" value="">
                 </div>
             </div>
             <div class="code">
@@ -68,7 +67,9 @@ if ($n <= 0) {
                         <pre class="language-html">
                             <code class="language-html">
 &lt;form id="form" action="http://<?= $host_name["ip_address"] ?>/coinpay/select-currency/" method="post"&gt;
-  &lt;input type="hidden" name="data" value=""&gt;
+  &lt;input type="hidden" name="order-id" value=""&gt;
+  &lt;input type="hidden" name="total-price" value=""&gt;
+  &lt;input type="hidden" name="merchant-id" value=""&gt;
   &lt;input type="image" src="http://<?= $host_name["ip_address"] ?>/coinpay/assets/img/coinpay-logo.png" name="submit" style="width: 180px; height: 50px;" alt="CoinPay, the easy way to pay with bitcoins."&gt;
 &lt;/form&gt;
                             </code>
@@ -83,9 +84,12 @@ if ($n <= 0) {
 
                 <div class="code-button">
                     <h3 id="preview-text">Preview</h3>
-                    <form id="test-form" action="" method="post">
-                        <input type="hidden" name="data" value="">
-                        <input type="image" src="http://<?= $host_name["ip_address"] ?>/coinpay/assets/img/coinpay-logo.png" name="submit" style="width: 180px; height: 50px;" alt="CoinPay, the easy way to pay with bitcoins.">
+                    <p class="preview-exp">Preview of the code given on the left</p>
+                    <form id="create-order-form" action="http://<?= $host_name["ip_address"] ?>/coinpay/select-currency/" method="post">
+                        <input type="hidden" name="order-id" value="0">
+                        <input type="hidden" name="total-price" value="1">
+                        <input type="hidden" name="merchant-id" value="<?= $_SESSION["user_id"] ?>">
+                        <input type="image" src="http://<?= $host_name["ip_address"] ?>/coinpay/assets/img/coinpay-button.svg" name="submit" style="width: 180px; height: 100px;" alt="CoinPay, the easy way to pay with bitcoins.">
                     </form>
                 </div>
             </div>

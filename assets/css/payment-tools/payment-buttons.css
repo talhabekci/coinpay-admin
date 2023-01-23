@@ -110,12 +110,6 @@ label {
     width: 846px;
 }
 
-.code-button {
-    border: 1px solid;
-
-    /*846,153*/
-}
-
 div.copy {
     padding: 10px;
     font-size: 18px;
@@ -161,10 +155,18 @@ div.copy p {
 }
 
 #preview-text {
-    margin-top: 100px;
+    text-align: left;
+    padding: 10px;
+    color: #f99a23;
 }
 
-#test-form {
-    margin-top: 100px;
+.preview-exp {
+    text-align: left;
+    font-size: 14px;
+    padding: 10px;
+    color: #3A3A3A;
+}
 
+#create-order-form {
+    margin-top: 40px;
 }
